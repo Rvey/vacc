@@ -1,16 +1,9 @@
-import CheckForm from "./components/Forms/CheckFrom";
-import UserForm from "./components/Forms/UserForm";
-import { useState } from "react";
+
+import UserVaccine from "./Pages/UserVaccine";
 function App() {
-  const [step, setStep] = useState(1);
   return (
     <div>
-      {step}
-      {step === 1 ? (
-        <CheckForm step={step} setStep={setStep} />
-      ) : step === 2 ? (
-        <UserForm step={step} setStep={setStep} />
-      ) : null}
+     <UserVaccine />
     </div>
   );
 }
