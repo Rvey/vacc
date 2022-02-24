@@ -1,6 +1,9 @@
 import { Form, Formik, Field } from "formik";
+import { useState } from "react";
+import MailConfirm from "../../MailConfirm";
+const UserForm = ({ step, setStep }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const UserForm = () => {
   return (
     <div>
       <h1>Personal Info</h1>
@@ -137,18 +140,27 @@ const UserForm = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-3">
+                <button
+                  type="button"
+                  onClick={() => setStep(step - 1)}
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Prev
+                </button>
                 <button
                   type="submit"
+                  onClick={() => setIsOpen(!isOpen)}
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Next
+                  Submit
                 </button>
               </div>
             </div>
           </Form>
         )}
       </Formik>
+      <MailConfirm setIsOpen={setIsOpen} isOpen={isOpen} />
     </div>
   );
 };
