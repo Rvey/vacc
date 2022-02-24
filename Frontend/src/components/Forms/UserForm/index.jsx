@@ -10,7 +10,6 @@ const UserForm = () => {
   return (
     <div>
       <h1>Personal Info</h1>
-      {JSON.stringify(checkResult)}
       <Formik
         initialValues={{
           lastName: "",
@@ -25,8 +24,7 @@ const UserForm = () => {
           SideEffectDesc: checkResult.SideEffectDesc,
         }}
         onSubmit={(values) => {
-          // sendData("appointments" , values);
-          console.log(values);
+          sendData("appointments" ,values);
           setIsOpen(!isOpen)
         }}
       >

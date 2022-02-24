@@ -17,15 +17,15 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         // required: true
     },    
-    adress: {
+    address: {
         type: String,
         // required: true
     },    
-    CIN: {
+    Cin: {
         type: String,
         // required: true
     },    
-    vaccinNumber: {
+    VaccNumber: {
         type: String,
         // required: true
     },    
@@ -33,15 +33,11 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         // required: false
     },    
-    effectedDetails: {
+    SideEffectDesc: {
         type: String,
         // required: false
-    },    
-    chronicDiseaseDetails: {
-        type: String,
-        // required: false
-    },    
-    phoneNumber: {
+    },       
+    phone: {
         type: String,
         // required: true
     },   

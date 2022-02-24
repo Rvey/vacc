@@ -1,11 +1,10 @@
 const appointment = require("../models/appointment.model");
 const bcrypt = require("bcryptjs");
-// const logger = require("../utils/logger");
 
 const index = async (req, res) => {
   sss.find()
     .then((result) => {
-        res.status(200).json(result);
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json({ error: err.message });
@@ -23,7 +22,7 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res, next) => {
-  const { email, firstName, lastName, age, address, Cin,vaccinNumber, phone,chronicDisease, effectedDetails, chronicDiseaseDetails } = req.body;
+  const { email, firstName, lastName, age, address, Cin, VaccNumber, phone, chronicDisease, SideEffectDesc } = req.body;
   try {
     // if (!email || !firstName || !lastName || !age || !adress || !CIN || !vaccinNumber || !phoneNumber || !manager )
     //   return res.status(400).json({ message: "Please fill all the fields" });
@@ -35,20 +34,17 @@ const store = async (req, res, next) => {
 
     const newAppointment = await appointment.create({
       email,
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      Cin: Cin,
-      address: address,
-      vaccinNumber: vaccinNumber,
-      chronicDisease: chronicDisease,
-      phone: phone,
-      effectedDetails: effectedDetails,
-      chronicDiseaseDetails: chronicDiseaseDetails,
-      // manager:manager
+      firstName,
+      lastName,
+      age,
+      Cin,
+      address,
+      VaccNumber,
+      chronicDisease,
+      phone,
+      SideEffectDesc,
     });
 
-    // logger.info(`New driver ${firstName} ${lastName} submitted for a job , license : ${license}`);
     res.status(200).json({ newAppointment });
   } catch (err) {
     res.status(400).json({ error: err.message });
