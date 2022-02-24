@@ -33,16 +33,16 @@ const store = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10)
         
         console.log(hashedPassword);
-        // const newManager = await manager.create({ 
-        //     Email, 
-        //     FirstName, 
-        //     LastName, 
-        //     Password: hashedPassword 
-        // })
+        const newManager = await manager.create({ 
+            Email: email, 
+            FirstName: firstName, 
+            LastName: lastName, 
+            Password: hashedPassword 
+        })
 
         // // managerEmail(email, firstName, lastName, password, url)
 
-        // res.status(200).json({ newManager })
+        res.status(200).json({ newManager })
 
     } catch (err) {
         res.status(400).json({ error: err.message })

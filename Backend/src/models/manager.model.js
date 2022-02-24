@@ -5,7 +5,7 @@ const managerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    lastName: {
+    LastName: {
         type: String,
         required: true
     },    
