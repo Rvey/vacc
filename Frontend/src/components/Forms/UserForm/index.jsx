@@ -1,13 +1,16 @@
 import { Form, Formik, Field } from "formik";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../Contexts/UserContext";
 import { sendData } from "../../../Hooks/useFetch";
 import MailConfirm from "../../MailConfirm";
-const UserForm = ({ step, setStep }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
+const UserForm = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { setStep , step , checkResult } = useContext(UserContext)
   return (
     <div>
       <h1>Personal Info</h1>
+      {JSON.stringify(checkResult)}
       <Formik
         initialValues={{
           lastName: "",
@@ -16,9 +19,15 @@ const UserForm = ({ step, setStep }) => {
           phone: "",
           Cin: "",
           email: "",
+          age: checkResult.age,
+          VaccNumber: checkResult.VaccNumber,
+          chronicDisease: checkResult.chronicDisease,
+          SideEffectDesc: checkResult.SideEffectDesc,
         }}
         onSubmit={(values) => {
-          sendData("appointments" , values);
+          // sendData("appointments" , values);
+          console.log(values);
+          setIsOpen(!isOpen)
         }}
       >
         {({
@@ -42,7 +51,6 @@ const UserForm = ({ step, setStep }) => {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      autoComplete="given-name"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -58,7 +66,6 @@ const UserForm = ({ step, setStep }) => {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      autoComplete="family-name"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -71,10 +78,9 @@ const UserForm = ({ step, setStep }) => {
                       Email
                     </label>
                     <Field
-                      type="text"
+                      type="email"
                       name="email"
                       id="email"
-                      autoComplete="email"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -90,7 +96,6 @@ const UserForm = ({ step, setStep }) => {
                       type="text"
                       name="phone"
                       id="phone"
-                      autoComplete="phone"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -105,7 +110,6 @@ const UserForm = ({ step, setStep }) => {
                       type="text"
                       name="address"
                       id="address"
-                      autoComplete="address"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -120,7 +124,6 @@ const UserForm = ({ step, setStep }) => {
                       type="text"
                       name="Cin"
                       id="Cin"
-                      autoComplete="postal-code"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -135,7 +138,6 @@ const UserForm = ({ step, setStep }) => {
                       type="text"
                       name="city"
                       id="city"
-                      autoComplete="address-level2"
                       className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -151,7 +153,6 @@ const UserForm = ({ step, setStep }) => {
                 </button>
                 <button
                   type="submit"
-                  onClick={() => setIsOpen(!isOpen)}
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Submit
