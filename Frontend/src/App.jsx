@@ -1,7 +1,11 @@
+import CheckForm from "./components/Forms/CheckFrom";
+import UserForm from "./components/Forms/UserForm";
+
 function App() {
   return (
     <div className="App">
-gege
+<UserForm/>
+<CheckForm />
     </div>
   );
 }
