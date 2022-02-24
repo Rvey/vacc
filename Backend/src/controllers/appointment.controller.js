@@ -23,8 +23,7 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res, next) => {
-  const { email, firstName, lastName, age, adress, CIN,vaccinNumber, phoneNumber,chronicDisease, effectedDetails, chronicDiseaseDetails } = req.body;
-  console.log(req.body);
+  const { email, firstName, lastName, age, address, Cin,vaccinNumber, phone,chronicDisease, effectedDetails, chronicDiseaseDetails } = req.body;
   try {
     // if (!email || !firstName || !lastName || !age || !adress || !CIN || !vaccinNumber || !phoneNumber || !manager )
     //   return res.status(400).json({ message: "Please fill all the fields" });
@@ -39,11 +38,11 @@ const store = async (req, res, next) => {
       firstName: firstName,
       lastName: lastName,
       age: age,
-      CIN: CIN,
-      adress: adress,
+      Cin: Cin,
+      address: address,
       vaccinNumber: vaccinNumber,
       chronicDisease: chronicDisease,
-      phoneNumber: phoneNumber,
+      phone: phone,
       effectedDetails: effectedDetails,
       chronicDiseaseDetails: chronicDiseaseDetails,
       // manager:manager

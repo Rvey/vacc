@@ -7,7 +7,7 @@ const DriverSchema = Yup.object().shape({
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
-const AdminLoginForm = () => {
+const ManagerLoginForm = () => {
   let navigate = useNavigate();
   return (
     <Formik
@@ -22,7 +22,7 @@ const AdminLoginForm = () => {
     >
       {({ errors, touched }) => (
         <Form>
-          <div>Admin Login</div>
+          <div>Manager Login</div>
           {/* <Alert error={error} /> */}
           <div className="mt-4">
             <label
@@ -76,4 +76,4 @@ const AdminLoginForm = () => {
     </Formik>
   );
 };
-export default AdminLoginForm;
+export default ManagerLoginForm;

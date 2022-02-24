@@ -1,5 +1,6 @@
 import { Form, Formik, Field } from "formik";
 import { useState } from "react";
+import { sendData } from "../../../Hooks/useFetch";
 import MailConfirm from "../../MailConfirm";
 const UserForm = ({ step, setStep }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ const UserForm = ({ step, setStep }) => {
           email: "",
         }}
         onSubmit={(values) => {
-          console.log(values);
+          sendData("appointments" , values);
         }}
       >
         {({
