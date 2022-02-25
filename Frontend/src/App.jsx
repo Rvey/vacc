@@ -1,9 +1,9 @@
 
-import UserVaccine from "./Pages/UserVaccine";
+import Routers from "./routes/routes";
 function App() {
   return (
     <div>
-     <UserVaccine />
+     <Routers />
     </div>
   );
 }

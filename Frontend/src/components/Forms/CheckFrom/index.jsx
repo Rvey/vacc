@@ -1,6 +1,6 @@
 import { Form, Formik, Field } from "formik";
 import CheckInput from "../../CheckInput";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 
 const CheckForm = () => {

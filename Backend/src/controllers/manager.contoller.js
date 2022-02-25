@@ -11,6 +11,7 @@ const loginManager = async (req, res) => {
         const existingAdmin = await manager.findOne({ email })
         if (!existingAdmin) return res.status(404).json({ message: "Manager not found" })
         comparePassword(password, existingAdmin, res)
+        res.status(200).json({ message: "Login Successful" })
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
@@ -19,7 +20,6 @@ const loginManager = async (req, res) => {
 
 const store = async (req, res) => {
     const { email, firstName, lastName } = req.body
-    let url = 'http://localhost:4000/'
     try {
         if (!email || !firstName || !lastName) 
         return res.status(400).json({ message: "Please fill all the fields" })
