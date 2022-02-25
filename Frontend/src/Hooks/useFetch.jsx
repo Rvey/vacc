@@ -17,5 +17,5 @@ export const Login = async (url , data) => {
     },
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
-  return response.json()
+  return response
 }

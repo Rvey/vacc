@@ -1,15 +1,14 @@
 import { Field, Form, Formik } from "formik";
-// import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { Login } from "../../Hooks/useFetch"
+import { Login } from "../../Hooks/useFetch";
 const DriverSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
-
 const ManagerLoginForm = () => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   return (
     <Formik
       initialValues={{
@@ -17,8 +16,15 @@ const ManagerLoginForm = () => {
         password: "",
       }}
       validationSchema={DriverSchema}
-      onSubmit={ (values) => {
-        Login("managers" , values)
+      onSubmit={async (values) => {
+        Login("managers", values).then((data) => {
+          if (data.status === 200) {
+            console.log("welcome");
+            navigate("/");
+          } else {
+            console.log("wrong creds");
+          }
+        });
       }}
     >
       {({ errors, touched }) => (

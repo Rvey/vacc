@@ -6,12 +6,12 @@ const { comparePassword } = require('../helpers/JwtValidation')
 const loginManager = async (req, res) => {
     const { email, password } = req.body
     try {
-        if (!email || !password ) 
-        return res.status(400).json({ message: "Please fill all the fields" })
+        if (!email || !password)
+            return res.status(404).json({ message: "Please fill all the fields" })
         const existingAdmin = await manager.findOne({ email })
         if (!existingAdmin) return res.status(404).json({ message: "Manager not found" })
         comparePassword(password, existingAdmin, res)
-        res.status(200).json({ message: "Login Successful" })
+         res.status(200).json({ message: "Login Successful" })
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
@@ -21,23 +21,23 @@ const loginManager = async (req, res) => {
 const store = async (req, res) => {
     const { email, firstName, lastName } = req.body
     try {
-        if (!email || !firstName || !lastName) 
-        return res.status(400).json({ message: "Please fill all the fields" })
+        if (!email || !firstName || !lastName)
+            return res.status(400).json({ message: "Please fill all the fields" })
 
         const existingManager = await manager.findOne({ email })
 
-        if (existingManager) 
-        return res.status(400).json({ message: "Manager already exists" })
+        if (existingManager)
+            return res.status(400).json({ message: "Manager already exists" })
 
         let password = Math.random().toString(20).substring(2, 10)
         console.log(password);
         const hashedPassword = await bcrypt.hash(password, 10)
-        
-        const newManager = await manager.create({ 
-            email: email, 
-            firstName: firstName, 
-            lastName: lastName, 
-            password: hashedPassword 
+
+        const newManager = await manager.create({
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            password: hashedPassword
         })
 
         res.status(200).json({ newManager })
