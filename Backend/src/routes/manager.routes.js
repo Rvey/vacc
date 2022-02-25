@@ -4,9 +4,10 @@ const router = express.Router();
 // const morgan = require('morgan')
 const {
     store,
-    loginManager
+    loginManager,
+    index
 } = require('../controllers/manager.contoller')
-
+router.get('/', index)
 router.post('/store', store)
 router.post('/login',loginManager)
 

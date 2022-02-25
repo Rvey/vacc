@@ -17,6 +17,15 @@ const loginManager = async (req, res) => {
     }
 }
 
+const index = async (req, res) => {
+    try {
+        const managers = await manager.find()
+        res.status(200).json(managers)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
 
 const store = async (req, res) => {
     const { email, firstName, lastName } = req.body
@@ -48,6 +57,7 @@ const store = async (req, res) => {
 }
 
 module.exports = {
+    index,
     loginManager,
     store
 };

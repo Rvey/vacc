@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useFetch } from '../../Hooks/useFetch';
 const ManagerTable = () => {
-const [data , setData] = useState([]);
+
+const { data  } = useFetch("managers")
 return (
     <div>
          <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
