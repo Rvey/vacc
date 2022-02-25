@@ -19,7 +19,6 @@ const ManagerLoginForm = () => {
       onSubmit={async (values) => {
         Login("managers", values).then((data) => {
           if (data.status === 200) {
-            console.log("welcome");
             navigate("/");
           } else {
             console.log("wrong creds");
@@ -29,8 +28,7 @@ const ManagerLoginForm = () => {
     >
       {({ errors, touched }) => (
         <Form>
-          <div>Manager Login</div>
-          {/* <Alert error={error} /> */}
+          <div>Ministère de la santé Login</div>
           <div className="mt-4">
             <label
               htmlFor="email"
