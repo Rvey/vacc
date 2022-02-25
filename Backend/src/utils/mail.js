@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer')
 const hbs = require('nodemailer-express-handlebars')
+
 const sendMail = async (email, firstName , lastName, date ) => {
   try {
     let mailTransporter = nodemailer.createTransport({
@@ -35,7 +36,7 @@ const sendMail = async (email, firstName , lastName, date ) => {
     mailTransporter.sendMail(mailDetails, function (err, data) {
       if (err) {
         console.log('Error Occurs', err)
-      } else {
+      }else {
         console.log('Email sent successfully', data)
       }
     })

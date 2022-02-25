@@ -7,6 +7,7 @@ import MailConfirm from "../../MailConfirm";
 const UserForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { setStep , step , checkResult } = useContext(UserContext)
+  
   return (
     <div>
       <h1>Personal Info</h1>

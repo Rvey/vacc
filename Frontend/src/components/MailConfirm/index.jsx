@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+
 const MailConfirm = ({ isOpen, setIsOpen }) => {
   return (
     <Transition show={isOpen} as={Fragment}>
