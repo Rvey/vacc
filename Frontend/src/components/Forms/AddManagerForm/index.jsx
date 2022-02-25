@@ -26,6 +26,7 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
       validationSchema={Manager}
       onSubmit={(values) => {
         sendData("managers" ,values)
+        window.location.reload();
       }}
     >
       {({ errors, touched }) => (

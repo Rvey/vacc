@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import axios from "axios";
 export const sendData = async (url, data) => {
   const response = await fetch(`http://localhost:4000/api/${url}/store`, {
     method: "POST",
@@ -28,37 +28,68 @@ export const deleteManager = (url, id) => {
   });
 };
 
+// export const useFetch = async (url) => {
+//   const [data, setData] = useState(null);
+//   const [error, setError] = useState(null);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+
+//     const fetchData = async () => {
+//     const res = await fetch(url)
+//       .then((res) => {
+//         if (!res.ok) {
+//           throw Error("could not fetch the data from that resource");
+//         }
+//         return res.json();
+//       })
+//       .then((data) => {
+//         setData(data);
+//         setLoading(false);
+//         setError(null);
+//       })
+//       .catch((err) => {
+//         if (err.name === "AbortError") {
+//           console.log("fetch aborted");
+//         } else {
+//           setLoading(false);
+//           setError(err.message);
+//         }
+//       }) };
+//       fetchData();
+//     }, [url]);
+
+//   return { data, error, loading };
+// };
+
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+
+
+const fetchData = () => {
+  setLoading(true);
+  axios
+    .get(url)
+    .then((res) => {
+      setData(res.data);
+    })
+    .catch((err) => {
+      setError(err);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}
 
   useEffect(() => {
-    const abortCtrl = new AbortController();
-
-    fetch(url, { signal: abortCtrl.signal })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("could not fetch the data from that resource");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-        setError(null);
-        // console.log(data);
-      })
-      .catch((err) => {
-        if (err.name === "AbortError") {
-          console.log("fetch aborted");
-        } else {
-          setLoading(false);
-          setError(err.message);
-        }
-      });
+    fetchData()
   }, [url]);
 
-  return { data, error, loading, isLogged };
+  const refetch = () => {
+    fetchData()
+  };
+
+  return { data, error, loading, refetch };
 };
