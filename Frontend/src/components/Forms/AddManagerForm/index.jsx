@@ -1,24 +1,31 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import { sendData, useFetch } from "../../../Hooks/useFetch";
 
 const Manager = Yup.object().shape({
   firstName: Yup.string().min(2, "Too Short!").required("Required"),
   lastName: Yup.string().required("Required"),
+  region:Yup.string().required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
 });
 
 const AddManagerForm = ({ setIsOpen, isOpen }) => {
+  const { data } = useFetch(
+    "https://calm-fjord-14795.herokuapp.com/api/regions"
+  );
+  
   return (
     <Formik
       initialValues={{
         firstName: "",
         lastName: "",
         email: "",
+        region: ""
       }}
       validationSchema={Manager}
       onSubmit={(values) => {
-        console.log(values);
+        sendData("managers" ,values)
       }}
     >
       {({ errors, touched }) => (
@@ -61,6 +68,7 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
               </div>
             ) : null}
           </div>
+
           <div className="mt-4">
             <label
               htmlFor="email"
@@ -80,8 +88,30 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
               </div>
             ) : null}
           </div>
+
+          <div className="mt-4">
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Region
+            </label>
+            <Field className="bg-gray-700 border border-gray-300 text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" as="select" name="region">
+              {data &&
+                data.map((el, index) => (
+                  <option key={index} value={el.region}>
+                    {el.region}
+                  </option>
+                ))}
+            </Field>
+            {errors.email && touched.email ? (
+              <div className="text-red-500 font-semibold dark:text-red-400">
+                {errors.email}
+              </div>
+            ) : null}
+          </div>
           <div className="mt-8 flex justify-between">
-          <button
+            <button
               type="submit"
               className="w-[12em] text-green-900 bg-white border border-green-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:text-white dark:border-green-600 dark:hover:bg-green-700 dark:hover:border-gray-700 dark:focus:ring-green-800"
             >

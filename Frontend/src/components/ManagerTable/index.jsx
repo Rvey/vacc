@@ -29,6 +29,12 @@ const ManagerTable = () => {
                 >
                   email
                 </th>
+                <th
+                  scope="col"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                >
+                  region
+                </th>
                 <th scope="col" className="relative py-3 px-6">
                   <span className="sr-only">Edit</span>
                 </th>
@@ -41,6 +47,7 @@ const ManagerTable = () => {
                                     <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{manager.firstName}</td>
                                     <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{manager.lastName}</td>
                                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">{manager.email}</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">{manager.region}</td>
                                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                                       <div className='space-x-3'>
                                           

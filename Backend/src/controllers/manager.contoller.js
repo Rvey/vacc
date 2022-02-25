@@ -28,7 +28,7 @@ const index = async (req, res) => {
 
 
 const store = async (req, res) => {
-    const { email, firstName, lastName } = req.body
+    const { email, firstName, lastName , region } = req.body
     try {
         if (!email || !firstName || !lastName)
             return res.status(400).json({ message: "Please fill all the fields" })
@@ -46,7 +46,8 @@ const store = async (req, res) => {
             email: email,
             firstName: firstName,
             lastName: lastName,
-            password: hashedPassword
+            password: hashedPassword,
+            region
         })
 
         res.status(200).json({ newManager })
