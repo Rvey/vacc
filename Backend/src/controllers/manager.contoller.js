@@ -57,8 +57,20 @@ const store = async (req, res) => {
     }
 }
 
+const deleteManager = async (req, res) => {
+    const { id } = req.params
+    try {
+        await manager.findByIdAndDelete(id)
+        res.status(200).json({ message: "Manager deleted successfully" })
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
+
 module.exports = {
     index,
     loginManager,
-    store
+    store,
+    deleteManager
 };

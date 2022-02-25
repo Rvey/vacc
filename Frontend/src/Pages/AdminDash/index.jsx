@@ -1,5 +1,5 @@
 import ManagerTable from "../../components/ManagerTable";
-import Modal from "../../components/Modal";
+import Modal from "../../components/Modals";
 import { useState } from "react";
 import AddManagerForm from "../../components/Forms/AddManagerForm";
 const AdminDash = () => {

@@ -22,6 +22,12 @@ export const Login = async (url, data) => {
   return response;
 };
 
+export const deleteManager = (url, id) => {
+  return fetch(`http://localhost:4000/api/${url}/${id}`, {
+    method: "DELETE",
+  });
+};
+
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
