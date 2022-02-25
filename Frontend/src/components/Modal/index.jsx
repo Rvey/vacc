@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-const MailConfirm = ({ isOpen, setIsOpen , component }) => {
+const Modal = ({ isOpen, setIsOpen , component }) => {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog
@@ -40,31 +40,10 @@ const MailConfirm = ({ isOpen, setIsOpen , component }) => {
           >
             <div className="inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl dark:bg-gray-700">
               <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div className="p-6 pt-0 text-center">
-                  <svg
-                    className="mx-auto my-5 w-14 h-14 text-gray-400 dark:text-gray-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    next vaccine appointment has been sent to your email
-                  </h3>
-                  <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    type="button"
-                    className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                  >
-                    Confirm
-                  </button>
+                <div className="p-6 pt-0 ">
+                  <div className="pt-7 pb-3 font-semibold text-white text-xl">Add Manager</div>
+                  <div className="w-1/2 h-2 bg-slate-300 rounded-md"></div>
+                  {component}
                 </div>
               </div>
             </div>
@@ -74,4 +53,4 @@ const MailConfirm = ({ isOpen, setIsOpen , component }) => {
     </Transition>
   );
 };
-export default MailConfirm;
+export default Modal;

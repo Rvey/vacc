@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useFetch } from "../../Hooks/useFetch";
+import Modal from "../Modal";
 const ManagerTable = () => {
   const { data, loading } = useFetch("http://localhost:4000/api/managers");
-  console.log(data);
+  const [open , setIsOpen] = useState(false)
   return (
     <div>
       <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -56,7 +57,8 @@ const ManagerTable = () => {
                                         <button
                                             type="button"
                                             onClick={() => {
-                                            
+                                            setIsOpen(!open)
+                                            console.log('dasda');
                                             }}
                                             className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-800"
                                         >
@@ -69,8 +71,7 @@ const ManagerTable = () => {
                     </tbody>
           </table>
         </div>
-        {/* <ConfirmDeleteManager isOpen={isOpenConfirm} setIsOpen={setIsOpenConfirm} managerId={manager} /> */}
-        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} component={<UpdateManagerForm setIsOpen={setIsOpen} manager={manager}  />} title={'Update Manager'} /> */}
+        <Modal isOpen={open} setIsOpen={setIsOpen} />
       </div>
     </div>
   );
