@@ -1,7 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-// const logger = require('./utils/logger')
 const cors = require('cors')
 const app = express()
 

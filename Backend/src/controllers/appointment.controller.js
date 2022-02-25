@@ -1,5 +1,7 @@
 const appointment = require("../models/appointment.model");
 const bcrypt = require("bcryptjs");
+const sendMail = require("../utils/mail")
+var dayjs = require('dayjs')
 
 const index = async (req, res) => {
   sss.find()
@@ -32,6 +34,8 @@ const store = async (req, res, next) => {
     if (existingEmail)
       return res.status(400).json({ message: "email already exists" });
 
+    const date = dayjs(new Date()).add(1, 'month').format('DD/MM/YYYY')
+
     const newAppointment = await appointment.create({
       email,
       firstName,
@@ -43,8 +47,10 @@ const store = async (req, res, next) => {
       chronicDisease,
       phone,
       SideEffectDesc,
+      date: date
     });
 
+    sendMail(email, firstName, lastName, date)
     res.status(200).json({ newAppointment });
   } catch (err) {
     res.status(400).json({ error: err.message });
