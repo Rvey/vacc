@@ -1,13 +1,13 @@
 import { Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { Login } from "../../Hooks/useFetch";
+import { Login } from "../../../Hooks/useFetch";
 const DriverSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
-const ManagerLoginForm = () => {
+const AdminLoginForm = () => {
   let navigate = useNavigate();
   return (
     <Formik
@@ -81,4 +81,4 @@ const ManagerLoginForm = () => {
     </Formik>
   );
 };
-export default ManagerLoginForm;
+export default AdminLoginForm;
