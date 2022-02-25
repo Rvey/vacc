@@ -2,13 +2,15 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const comparePassword = async (password, user, res) => {
-    bcrypt.compare(password,password)
+    console.log(password, user);
+    bcrypt.compare(password,user.password)
         .then((isCorrect) => {
             if (isCorrect) {
                 const payload = {
                     id: user._id,
                     email: user.email,
                 }
+                console.log(payload);
                 jwt.sign(payload, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '1h' }, (err, token) => {
                     if (err) return res.json({ message: err.message })
                     return res.status(200).json({
