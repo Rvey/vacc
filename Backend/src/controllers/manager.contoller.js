@@ -5,7 +5,6 @@ const { comparePassword } = require('../helpers/JwtValidation')
 
 const loginManager = async (req, res) => {
     const { email, password } = req.body
-
     try {
         if (!email || !password ) 
         return res.status(400).json({ message: "Please fill all the fields" })
