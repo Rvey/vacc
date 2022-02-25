@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export const sendData = async (url, data) => {
   const response = await fetch(`http://localhost:4000/api/${url}/store`, {
@@ -11,7 +11,7 @@ export const sendData = async (url, data) => {
   return response.json(); // parses JSON response into native JavaScript objects
 };
 
-export const Login = async (url , data) => {
+export const Login = async (url, data) => {
   const response = await fetch(`http://localhost:4000/api/${url}/login`, {
     method: "POST",
     headers: {
@@ -19,30 +19,40 @@ export const Login = async (url , data) => {
     },
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
-  return response
-}
+  return response;
+};
 
-export const useFetch = (url, data) => {
-  const [response, setResponse] = useState(null);
+export const useFetch = (url) => {
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(url, data);
-        setResponse(res);
-        setIsLogged(true);
-      } catch (err) {
-        setError(err);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [url, data]);
+    const abortCtrl = new AbortController();
 
-  return { response, error, loading, isLogged };
+    fetch(url, { signal: abortCtrl.signal })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("could not fetch the data from that resource");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+        setError(null);
+        // console.log(data);
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("fetch aborted");
+        } else {
+          setLoading(false);
+          setError(err.message);
+        }
+      });
+  }, [url]);
+
+  return { data, error, loading, isLogged };
 };
-

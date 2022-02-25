@@ -1,30 +1,39 @@
-import { useState } from 'react';
-import { useFetch } from '../../Hooks/useFetch';
+import { useState } from "react";
+import { useFetch } from "../../Hooks/useFetch";
 const ManagerTable = () => {
-
-const { data  } = useFetch("managers")
-return (
+  const { data, loading } = useFetch("http://localhost:4000/api/managers");
+  console.log(data);
+  return (
     <div>
-         <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-            <div className="overflow-hidden shadow-md sm:rounded-lg">
-                <table className="min-w-full">
-                    <thead className="bg-gray-50 dark:bg-gray-700">
-                        <tr>
-                            <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                FirstName
-                            </th>
-                            <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                LastName
-                            </th>
-                            <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                email
-                            </th>
-                            <th scope="col" className="relative py-3 px-6">
-                                <span className="sr-only">Edit</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+      <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+        <div className="overflow-hidden shadow-md sm:rounded-lg">
+          <table className="min-w-full">
+            <thead className="bg-gray-50 dark:bg-gray-700">
+              <tr>
+                <th
+                  scope="col"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                >
+                  FirstName
+                </th>
+                <th
+                  scope="col"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                >
+                  LastName
+                </th>
+                <th
+                  scope="col"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                >
+                  email
+                </th>
+                <th scope="col" className="relative py-3 px-6">
+                  <span className="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
                         {data &&
                             data?.map((manager, index) => (
                                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -58,12 +67,12 @@ return (
                                 </tr>
                             ))}
                     </tbody>
-                </table>
-            </div>
-            {/* <ConfirmDeleteManager isOpen={isOpenConfirm} setIsOpen={setIsOpenConfirm} managerId={manager} /> */}
-            {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} component={<UpdateManagerForm setIsOpen={setIsOpen} manager={manager}  />} title={'Update Manager'} /> */}
+          </table>
         </div>
+        {/* <ConfirmDeleteManager isOpen={isOpenConfirm} setIsOpen={setIsOpenConfirm} managerId={manager} /> */}
+        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} component={<UpdateManagerForm setIsOpen={setIsOpen} manager={manager}  />} title={'Update Manager'} /> */}
+      </div>
     </div>
-)
-}
-export default ManagerTable
+  );
+};
+export default ManagerTable;
