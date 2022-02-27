@@ -18,9 +18,13 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedT
 
 const appointmentRoute = require('./routes/appointment.routes')
 const managerRoute = require('./routes/manager.routes')
+const adminRoute = require('./routes/admin.routes')
+const urbanCenter = require('./routes/urbanCenter.routes')
 
 app.use('/api/appointments', appointmentRoute)
 app.use('/api/managers', managerRoute)
+app.use('/api/urbanCenter', urbanCenter) 
+app.use('/api/adminLogin', adminRoute)
 
 app.listen(process.env.PORT, () => {
     console.log(`up and running at http://localhost:${process.env.PORT}`);
