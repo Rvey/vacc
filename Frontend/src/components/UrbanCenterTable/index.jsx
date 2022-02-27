@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Modal from "../../components/Modals"
+import { useFetch } from "../../Hooks/useFetch";
 import AddUrbanCenterForm from '../Forms/AddUrbanCenter'
 const UrbanCenterTable = () => {
     const [open , setIsOpen] = useState(false)
-    const [data , setData] = useState([])
     const [center , setCenterId] = useState() 
-
+    const { data  } = useFetch("http://localhost:4000/api/urbanCenter")
 return (
     <div>
     <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -44,10 +44,10 @@ return (
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
                   <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {center.centerName}
+                    {center.urbanCenter}
                   </td>
                   <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {center.city}
+                    {center.location}
                   </td>
                   <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                     {center.region}

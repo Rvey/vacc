@@ -7,7 +7,6 @@ const ManagerTable = () => {
   const { data, refetch } = useFetch("http://localhost:4000/api/managers");
   const [open, setIsOpen] = useState(false);
   const [managerId, setManagerId] = useState("");
-  const [title , setTiele] = useState("my title")
   return (
     <div>
       <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
