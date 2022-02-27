@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useFetch } from "../../Hooks/useFetch";
-import ConfirmDelete from "../Forms/ConfirmDelete";
+import ConfirmDelete from "../ConfirmDelete";
 import Modal from "../Modals";
 import axios from "axios";
 const ManagerTable = () => {

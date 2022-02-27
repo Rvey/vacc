@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Modal from "../../components/Modals"
 import { useFetch } from "../../Hooks/useFetch";
-import AddUrbanCenterForm from '../Forms/AddUrbanCenter'
+import ConfirmDeleteCenter from '../ConfirmDeleteCenters';
 const UrbanCenterTable = () => {
     const [open , setIsOpen] = useState(false)
     const [center , setCenterId] = useState() 
@@ -73,9 +73,9 @@ return (
       </div>
       <Modal
         isOpen={open}
-        title="title"
+        title="Delete Center"
         setIsOpen={setIsOpen}
-      component={<AddUrbanCenterForm/>}
+      component={<ConfirmDeleteCenter centerId={center} isOpen={open} setIsOpen={setIsOpen}  />}
       />
     </div>
   </div>
