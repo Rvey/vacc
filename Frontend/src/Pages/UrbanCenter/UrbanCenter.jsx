@@ -1,4 +1,5 @@
 import { useState } from "react"
+import AddUrbanCenterForm from "../../components/Forms/AddUrbanCenter"
 import Modal from "../../components/Modals"
 import UrbanCenterTable from "../../components/UrbanCenterTable"
 const UrbanCenter = () => {
@@ -18,7 +19,9 @@ return (
     <UrbanCenterTable />
     <Modal
       isOpen={open}
+      title={"Add Urban Center"}
       setIsOpen={setIsOpen}
+      component={<AddUrbanCenterForm /> }
     //   component={<AddManagerForm isOpen={open} setIsOpen={setIsOpen} />}
     />
   </div>

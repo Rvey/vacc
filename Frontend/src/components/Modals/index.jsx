@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-const Modal = ({ isOpen, setIsOpen , component }) => {
+const Modal = ({ isOpen, setIsOpen, title, component }) => {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog
@@ -41,7 +41,9 @@ const Modal = ({ isOpen, setIsOpen , component }) => {
             <div className="inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl dark:bg-gray-700">
               <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div className="p-6 pt-0 ">
-                  <div className="pt-7 pb-3 font-semibold text-white text-xl">Add Manager</div>
+                  <div className="pt-7 pb-3 font-semibold text-white text-xl">
+                    {title}
+                  </div>
                   <div className="w-1/2 h-2 bg-slate-300 rounded-md"></div>
                   {component}
                 </div>

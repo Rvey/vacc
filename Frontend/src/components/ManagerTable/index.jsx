@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { useFetch } from "../../Hooks/useFetch";
 import ConfirmDelete from "../Forms/ConfirmDelete";
 import Modal from "../Modals";
-import axios  from "axios";
+import axios from "axios";
 const ManagerTable = () => {
-  const { data , refetch } = useFetch("http://localhost:4000/api/managers");
+  const { data, refetch } = useFetch("http://localhost:4000/api/managers");
   const [open, setIsOpen] = useState(false);
   const [managerId, setManagerId] = useState("");
-
-
-
+  const [title , setTiele] = useState("my title")
   return (
     <div>
       <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -94,7 +92,7 @@ const ManagerTable = () => {
               managerId={managerId}
             />
           }
-        />
+          />
       </div>
     </div>
   );

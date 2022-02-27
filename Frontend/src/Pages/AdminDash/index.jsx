@@ -19,6 +19,7 @@ const AdminDash = () => {
       <ManagerTable />
       <Modal
         isOpen={open}
+        title="add Manager"
         setIsOpen={setIsOpen}
         component={<AddManagerForm isOpen={open} setIsOpen={setIsOpen} />}
       />

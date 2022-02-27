@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import Modal from "../../components/Modals"
+import AddUrbanCenterForm from '../Forms/AddUrbanCenter'
 const UrbanCenterTable = () => {
     const [open , setIsOpen] = useState(false)
     const [data , setData] = useState([])
     const [center , setCenterId] = useState() 
+
 return (
     <div>
     <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -71,8 +73,9 @@ return (
       </div>
       <Modal
         isOpen={open}
+        title="title"
         setIsOpen={setIsOpen}
- 
+      component={<AddUrbanCenterForm/>}
       />
     </div>
   </div>
