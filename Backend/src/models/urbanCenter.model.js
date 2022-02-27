@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const urbanCenter = new mongoose.Schema({
-    city: {
+const UrbanCenterSchema = new mongoose.Schema({
+    location: {
         type: String,
     },
     region: {
@@ -12,4 +12,4 @@ const urbanCenter = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('urbanCenter', urbanCenter)
+module.exports = mongoose.model('urbanCenter', UrbanCenterSchema)

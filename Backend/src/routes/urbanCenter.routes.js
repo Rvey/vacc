@@ -4,11 +4,11 @@ const router = express.Router();
 const {
     store,
     index,
-    destroy
+    deleteUrbanCenter
 } = require('../controllers/urbanCenter.controller')
 
 router.get('/',index)
 router.post('/store', store)
-router.delete('/:id', destroy)
+router.delete('/:id', deleteUrbanCenter)
 
 module.exports = router;

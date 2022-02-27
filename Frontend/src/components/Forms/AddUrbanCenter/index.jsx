@@ -1,12 +1,11 @@
 import { Formik, Form, Field, useFormikContext } from "formik";
-import { useState, useRef, useEffect } from "react";
 import * as Yup from "yup";
 import { sendData, useFetch } from "../../../Hooks/useFetch";
 
 const Urban = Yup.object().shape({
-  UrbanCenter: Yup.string().min(2, "Too Short!").required("Required"),
+  urbanCenter: Yup.string().min(2, "Too Short!").required("Required"),
   region: Yup.string().required("Required"),
-  ville: Yup.string().required("Required"),
+  location: Yup.string().required("Required"),
 });
 
 const UrbanCenter = () => {
@@ -20,7 +19,7 @@ const UrbanCenter = () => {
     <Field
       className="bg-gray-700 border border-gray-300 text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       as="select"
-      name="ville"
+      name="location"
     >
       <option value="">Select a city</option>
       {data &&
@@ -34,8 +33,6 @@ const UrbanCenter = () => {
 };
 
 const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
-  //  const [region , setRegion] = useState(1)
-
   const { data, loading } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
@@ -43,35 +40,35 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
   return (
     <Formik
       initialValues={{
-        UrbanCenter: "",
+        urbanCenter: "",
         region: "",
-        ville: "",
+        location: "",
       }}
       validationSchema={Urban}
       onSubmit={(values) => {
-        // sendData("managers", values);
+        sendData("urbanCenter", values);
         // window.location.reload();
-        console.log(values);
+        // console.log(values.location);
       }}
     >
-      {({ errors, touched, values }) => (
+      {({ errors, touched }) => (
         <Form>
           <div className="mt-4">
             <label
-              htmlFor="UrbanCenter"
+              htmlFor="urbanCenter"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
               UrbanCenter
             </label>
             <Field
               type="text"
-              id="UrbanCenter"
+              id="urbanCenter"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              name="UrbanCenter"
+              name="urbanCenter"
             />
-            {errors.firstName && touched.firstName ? (
+            {errors.urbanCenter && touched.urbanCenter ? (
               <div className="text-red-500 font-semibold dark:text-red-400">
-                {errors.firstName}
+                {errors.urbanCenter}
               </div>
             ) : null}
           </div>
@@ -83,7 +80,11 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
             >
               Region
             </label>
-
+            {loading && (
+              <div className="text-blue-400 font-normal py-3">
+                Fetching regions...
+              </div>
+            )}
             <Field
               className="bg-gray-700 border border-gray-300 text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               as="select"
@@ -113,9 +114,9 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
               City / urban
             </label>
             <UrbanCenter />
-            {errors.ville && touched.ville ? (
+            {errors.location && touched.location ? (
               <div className="text-red-500 font-semibold dark:text-red-400">
-                {errors.ville}
+                {errors.location}
               </div>
             ) : null}
           </div>

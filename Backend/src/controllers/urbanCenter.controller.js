@@ -1,3 +1,4 @@
+const UrbanCenter = require('../models/urbanCenter.model')
 const index = async (req, res) => {
     try {
         const urbanCenters = await urbanCenter.find()
@@ -5,22 +6,17 @@ const index = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
-}   
+}
 
 const store = async (req, res) => {
-    const { city, region , urbanCenter } = req.body
+    const { location, region, urbanCenter } = req.body
     try {
-        if (!city || !urbanCenter || !region)
+        if (!location || !urbanCenter || !region)
             return res.status(400).json({ message: "Please fill all the fields" })
 
-        const existingUrbanCenter = await urbanCenter.findOne({ email })
-
-        if (existingUrbanCenter)
-            return res.status(400).json({ message: "Urban Center already exists" })
-
-        const newUrbanCenter = await urbanCenter.create({
+        const newUrbanCenter = await UrbanCenter.create({
             urbanCenter,
-            city,
+            location,
             region
         })
 
@@ -40,3 +36,8 @@ const deleteUrbanCenter = async (req, res) => {
     }
 }
 
+module.exports = {
+    deleteUrbanCenter,
+    store,
+    index
+}
