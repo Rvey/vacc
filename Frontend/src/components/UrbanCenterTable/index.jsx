@@ -1,15 +1,8 @@
 import { useState } from "react";
 import Modal from "../../components/Modals";
-import { useFetch } from "../../Hooks/useFetch";
 import ConfirmDeleteCenter from "../ConfirmDeleteCenters";
 import axios from "axios";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+import { useQuery } from "react-query";
 const UrbanCenterTable = () => {
   const [open, setIsOpen] = useState(false);
   const [center, setCenterId] = useState();

@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
-import { useFetch } from "../../Hooks/useFetch";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import ConfirmDelete from "../ConfirmDelete";
 import Modal from "../Modals";
 import axios from "axios";
 const ManagerTable = () => {
-  const { data, refetch } = useFetch("http://localhost:4000/api/managers");
   const [open, setIsOpen] = useState(false);
   const [managerId, setManagerId] = useState("");
+
+  const query = useQuery("managers", async () => {
+    const { data } = await axios.get("http://localhost:4000/api/managers");
+    return data;
+  });
+
   return (
     <div>
       <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -44,8 +49,8 @@ const ManagerTable = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
-                data?.map((manager, index) => (
+              {query &&
+                query.data?.map((manager, index) => (
                   <tr
                     key={index}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -91,7 +96,7 @@ const ManagerTable = () => {
               managerId={managerId}
             />
           }
-          />
+        />
       </div>
     </div>
   );

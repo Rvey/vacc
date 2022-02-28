@@ -1,13 +1,22 @@
-import { deleteManager } from "../../Hooks/useFetch";
-import { useFetch } from "../../Hooks/useFetch";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
 const ConfirmDelete = ({ isOpen, setIsOpen, managerId }) => {
-  const { refetch } = useFetch("http://localhost:4000/api/managers")
+  const queryClient = useQueryClient();
+  const deleteCenter = useMutation(
+    (id) => axios.delete(`http://localhost:4000/api/managers/${id}`),
+    {
+      onSuccess: () => queryClient.invalidateQueries("managers"),
+    }
+  );
   const handleDelete = (id) => {
-    deleteManager("managers", id);
-    setIsOpen(!isOpen);
-    window.location.reload();
-    // eslint-disable-next-line no-unused-expressions
+    deleteCenter.mutate(id, {
+      onSuccess: () => {
+        setIsOpen(!isOpen);
+      },
+    });
   };
+
+
   return (
     <div className="p-6 pt-0 text-center">
       <svg
@@ -29,9 +38,8 @@ const ConfirmDelete = ({ isOpen, setIsOpen, managerId }) => {
       </h3>
       <button
         onClick={() => {
-          handleDelete(managerId)
+          handleDelete(managerId);
         }}
-
         type="button"
         className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
       >
