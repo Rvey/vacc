@@ -1,6 +1,14 @@
 import { Formik, Form, Field, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { sendData, useFetch } from "../../../Hooks/useFetch";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
+import axios from "axios";
 
 const Urban = Yup.object().shape({
   urbanCenter: Yup.string().min(2, "Too Short!").required("Required"),
@@ -36,6 +44,15 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
   const { data, loading } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
+  const queryClient = useQueryClient();
+
+  const addMutation = useMutation(
+    (values) =>
+      axios.post("http://localhost:4000/api/urbanCenter/store", values),
+    {
+      onSuccess: () => queryClient.invalidateQueries("urbanCenter"),
+    }
+  );
 
   return (
     <Formik
@@ -46,9 +63,11 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
       }}
       validationSchema={Urban}
       onSubmit={(values) => {
-        sendData("urbanCenter", values);
-        // window.location.reload();
-        // console.log(values.location);
+        addMutation.mutate(values, {
+          onSuccess: () => {
+            setIsOpen(!isOpen)
+          },
+        });
       }}
     >
       {({ errors, touched }) => (

@@ -21,9 +21,8 @@ return (
       isOpen={open}
       title={"Add Urban Center"}
       setIsOpen={setIsOpen}
-      component={<AddUrbanCenterForm /> }
-    //   component={<AddManagerForm isOpen={open} setIsOpen={setIsOpen} />}
-    />
+      component={<AddUrbanCenterForm setIsOpen={setIsOpen} isOpen={open} /> }
+      />
   </div>
 )
 }

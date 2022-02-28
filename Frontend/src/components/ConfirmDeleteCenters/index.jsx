@@ -1,11 +1,19 @@
-import { deleteManager } from "../../Hooks/useFetch";
-import { useFetch } from "../../Hooks/useFetch";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
 const ConfirmDeleteCenter = ({ isOpen, setIsOpen, centerId }) => {
-  const { refetch } = useFetch("http://localhost:4000/api/managers");
+  const queryClient = useQueryClient();
+  const deleteCenter = useMutation(
+    (id) => axios.delete(`http://localhost:4000/api/urbanCenter/${id}`),
+    {
+      onSuccess: () => queryClient.invalidateQueries("urbanCenter"),
+    }
+  );
   const handleDelete = (id) => {
-    deleteManager("urbanCenter", id);
-    setIsOpen(!isOpen);
-    window.location.reload();
+    deleteCenter.mutate(id, {
+      onSuccess: () => {
+        setIsOpen(!isOpen);
+      },
+    });
   };
   return (
     <div className="p-6 pt-0 text-center">
