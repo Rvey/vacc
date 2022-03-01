@@ -14,7 +14,7 @@ const CheckInput = ({ values }) => {
           name="VaccNumber"
           as="select"
           id="VaccNumber"
-          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 pl-3   focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
         >
           <option value="">Select Vaccine</option>
           <option value="firstVacc">First Vaccine</option>
@@ -36,7 +36,7 @@ const CheckInput = ({ values }) => {
             name="chronicDisease"
             as="select"
             id="chronicDisease"
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 pl-3  focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
           >
             <option value="">Select</option>
             <option value="no">No</option>
@@ -55,7 +55,7 @@ const CheckInput = ({ values }) => {
             name="chronicDisease"
             as="select"
             id="effected"
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 pl-3  focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
           >
             <option value="">Select</option>
             <option value="noSideEffect">No</option>
@@ -74,7 +74,7 @@ const CheckInput = ({ values }) => {
             name="chronicDisease"
             as="select"
             id="chronicDisease"
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 pl-3  focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
           >
             <option value="">Select</option>
             <option value="noSideEffect">No</option>
@@ -91,7 +91,7 @@ const CheckInput = ({ values }) => {
               name="SideEffectDesc"
               as="textarea"
               placeholder="describe your side Effect from previous vaccine "
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+              className="mt-1 pl-3  focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
             />
           </div>
         )}
@@ -104,7 +104,7 @@ const CheckInput = ({ values }) => {
               name="SideEffectDesc"
               as="textarea"
               placeholder="describe your side Effect from second vaccine "
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+              className="mt-1 pl-3  focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
             />
           </div>
         )}

@@ -9,8 +9,7 @@ const UserForm = () => {
   const { setStep , step , checkResult } = useContext(UserContext)
   
   return (
-    <div>
-      <h1>Personal Info</h1>
+   <>
       <Formik
         initialValues={{
           lastName: "",
@@ -35,11 +34,11 @@ const UserForm = () => {
           touched,
           /* and other goodies */
         }) => (
-          <Form className="mt-5 md:mt-0 w-1/2 h-full">
-            <div className="shadow overflow-hidden sm:rounded-md">
-              <div className="px-4 py-5 bg-white sm:p-6">
-                <div className="grid grid-cols-6 gap-6">
-                  <div className="col-span-6 sm:col-span-3">
+          <Form className=" pt-[5em] w-1/2 flex flex-col justify-between h-full">
+           
+              <div className="px-4 py-5  sm:p-6">
+                <div className="flex flex-col gap-5">
+                  <div className="">
                     <label
                       htmlFor="first-name"
                       className="block text-sm font-medium text-gray-700"
@@ -50,11 +49,11 @@ const UserForm = () => {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
 
-                  <div className="col-span-6 sm:col-span-3">
+                  <div className="">
                     <label
                       htmlFor="last-name"
                       className="block text-sm font-medium text-gray-700"
@@ -65,11 +64,11 @@ const UserForm = () => {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
 
-                  <div className="col-span-6 sm:col-span-4">
+                  <div className="">
                     <label
                       htmlFor="email-address"
                       className="block text-sm font-medium text-gray-700"
@@ -80,11 +79,11 @@ const UserForm = () => {
                       type="email"
                       name="email"
                       id="email"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
 
-                  <div className="col-span-6">
+                  <div className="">
                     <label
                       htmlFor="street-address"
                       className="block text-sm font-medium text-gray-700"
@@ -95,10 +94,10 @@ const UserForm = () => {
                       type="text"
                       name="phone"
                       id="phone"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
-                  <div className="col-span-6">
+                  <div className="">
                     <label
                       htmlFor="street-address"
                       className="block text-sm font-medium text-gray-700"
@@ -109,10 +108,10 @@ const UserForm = () => {
                       type="text"
                       name="address"
                       id="address"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
-                  <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                  <div className="">
                     <label
                       htmlFor="postal-code"
                       className="block text-sm font-medium text-gray-700"
@@ -123,10 +122,10 @@ const UserForm = () => {
                       type="text"
                       name="Cin"
                       id="Cin"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
-                  <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                  <div className="">
                     <label
                       htmlFor="city"
                       className="block text-sm font-medium text-gray-700"
@@ -137,12 +136,12 @@ const UserForm = () => {
                       type="text"
                       name="city"
                       id="city"
-                      className="mt-1 focus:ring-indigo-500 py-3 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                     />
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-3">
+              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-3 mb-2 rounded-tr-md rounded-br-md shadow-md">
                 <button
                   type="button"
                   onClick={() => setStep(step - 1)}
@@ -157,12 +156,12 @@ const UserForm = () => {
                   Submit
                 </button>
               </div>
-            </div>
+            
           </Form>
         )}
       </Formik>
       <MailConfirm setIsOpen={setIsOpen} isOpen={isOpen} />
-    </div>
+      </>
   );
 };
 export default UserForm;
