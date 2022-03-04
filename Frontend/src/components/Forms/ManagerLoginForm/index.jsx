@@ -2,7 +2,7 @@ import { Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Login } from "../../../Hooks/useFetch";
-const DriverSchema = Yup.object().shape({
+const ManagerSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
@@ -15,7 +15,7 @@ const ManagerLoginForm = () => {
         email: "",
         password: "",
       }}
-      validationSchema={DriverSchema}
+      validationSchema={ManagerSchema}
       onSubmit={async (values) => {
         Login("managers", values).then((data) => {
           if (data.status === 200) {

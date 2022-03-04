@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Login } from "../../../Hooks/useFetch";
 import Error from "../../Shared/Error";
-const DriverSchema = Yup.object().shape({
+const AdminSchena = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
@@ -20,7 +20,7 @@ const AdminLoginForm = () => {
         email: "",
         password: "",
       }}
-      validationSchema={DriverSchema}
+      validationSchema={AdminSchena}
       onSubmit={async (values) => {
         Login("admin", values).then((data) => {
           if (data.ok) {
