@@ -1,13 +1,18 @@
 import { Field, Form, Formik } from "formik";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Login } from "../../../Hooks/useFetch";
+import Error from "../../Shared/Error";
 const DriverSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
 const AdminLoginForm = () => {
+  const [isShowing, setIsShowing] = useState(false);
+
+  const [error, setError] = useState("");
   let navigate = useNavigate();
   return (
     <Formik
@@ -17,18 +22,22 @@ const AdminLoginForm = () => {
       }}
       validationSchema={DriverSchema}
       onSubmit={async (values) => {
-        Login("managers", values).then((data) => {
-          if (data.status === 200) {
-            navigate("/");
+        Login("admin", values).then((data) => {
+          if (data.ok) {
+            navigate("/adminDash");
           } else {
-            console.log("wrong creds");
+            setIsShowing(true);
+            setError("wrong Credential");
           }
         });
       }}
     >
       {({ errors, touched }) => (
         <Form>
-          <div>Ministère de la santé Login</div>
+          <h1 className="font-bold text-gray-300 text-xl">
+            Ministère de la santé Login
+          </h1>
+          {isShowing && <Error error={error} />}
           <div className="mt-4">
             <label
               htmlFor="email"

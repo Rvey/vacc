@@ -3,6 +3,7 @@ import UserForm from "../../components/Forms/UserForm";
 import { useState } from "react";
 import { UserContext } from "../../components/Contexts/UserContext";
 import DocSvg from "../../assets/doctor.svg";
+
 const UserVaccine = () => {
   const [step, setStep] = useState(1);
   const [checkResult, setCheckResult] = useState();
@@ -17,4 +18,5 @@ const UserVaccine = () => {
     </div>
   );
 };
+
 export default UserVaccine;

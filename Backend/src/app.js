@@ -24,7 +24,7 @@ const urbanCenter = require('./routes/urbanCenter.routes')
 app.use('/api/appointments', appointmentRoute)
 app.use('/api/managers', managerRoute)
 app.use('/api/urbanCenter', urbanCenter) 
-app.use('/api/adminLogin', adminRoute)
+app.use('/api/admin', adminRoute)
 
 app.listen(process.env.PORT, () => {
     console.log(`up and running at http://localhost:${process.env.PORT}`);
