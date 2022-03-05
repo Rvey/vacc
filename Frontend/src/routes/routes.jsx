@@ -9,11 +9,11 @@ const Routers = () => {
     <BrowserRouter>
       <div className="">
         <Routes>
-          <Route path="/adminLogin" element={<AdminLogin />} />
-          <Route path="/managerLogin" element={<ManagerLogin />} />
-          <Route path="/" element={<UserVaccine />} />
-          <Route path="/AdminDash" element={<AdminDash />} />
-          <Route path="/urbanCenter" element={<UrbanCenter />} />
+            <Route path="/adminLogin" element={<AdminLogin />} />
+            <Route path="/managerLogin" element={<ManagerLogin />} />
+            <Route path="/" element={<UserVaccine />} />
+            <Route path="/AdminDash" element={<AdminDash />} />
+            <Route path="/urbanCenter" element={<UrbanCenter />} />
         </Routes>
       </div>
     </BrowserRouter>

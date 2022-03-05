@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 export const sendData = async (url, data) => {
   const response = await fetch(`http://localhost:4000/api/${url}/store`, {
     method: "POST",

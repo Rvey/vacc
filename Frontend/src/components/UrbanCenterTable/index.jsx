@@ -3,9 +3,11 @@ import Modal from "../../components/Modals";
 import ConfirmDeleteCenter from "../ConfirmDeleteCenters";
 import axios from "axios";
 import { useQuery } from "react-query";
+
 const UrbanCenterTable = () => {
   const [open, setIsOpen] = useState(false);
   const [center, setCenterId] = useState();
+  
   // Queries
   const query = useQuery("urbanCenter", async () => {
     const { data } = await axios.get("http://localhost:4000/api/urbanCenter");
