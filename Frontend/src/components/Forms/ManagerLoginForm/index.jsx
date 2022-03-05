@@ -18,8 +18,8 @@ const ManagerLoginForm = () => {
       validationSchema={ManagerSchema}
       onSubmit={async (values) => {
         Login("managers", values).then((data) => {
-          if (data.status === 200) {
-            navigate("/");
+          if (data.ok) {
+            navigate("/urbanCenter");
           } else {
             console.log("wrong creds");
           }
@@ -28,7 +28,9 @@ const ManagerLoginForm = () => {
     >
       {({ errors, touched }) => (
         <Form>
-          <div className="text-xl text-white font-semibold pb-5">Manager login</div>
+          <div className="text-xl text-white font-semibold pb-5">
+            Manager login
+          </div>
           <div className="mt-4">
             <label
               htmlFor="email"
