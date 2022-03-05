@@ -1,5 +1,9 @@
 import { Field, Form, Formik } from "formik";
+import Error from "../../Shared/Error";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { useState } from "react";
+import axios from "axios";
 import * as Yup from "yup";
 import { Login } from "../../../Hooks/useFetch";
 const ManagerSchema = Yup.object().shape({
@@ -9,6 +13,19 @@ const ManagerSchema = Yup.object().shape({
 
 const ManagerLoginForm = () => {
   let navigate = useNavigate();
+  const [error, setError] = useState("");
+  const loginMutation = useMutation(
+    (values) => axios.post("http://localhost:4000/api/managers/login", values),
+    {
+      onSuccess: () => {
+        sessionStorage.setItem("user", "manager");
+        navigate("/urbanCenter");
+      },
+      onError: () => {
+        setError("wrong creds");
+      },
+    }
+  );
   return (
     <Formik
       initialValues={{
@@ -17,13 +34,7 @@ const ManagerLoginForm = () => {
       }}
       validationSchema={ManagerSchema}
       onSubmit={async (values) => {
-        Login("managers", values).then((data) => {
-          if (data.ok) {
-            navigate("/urbanCenter");
-          } else {
-            console.log("wrong creds");
-          }
-        });
+        loginMutation.mutate(values);
       }}
     >
       {({ errors, touched }) => (
@@ -31,6 +42,8 @@ const ManagerLoginForm = () => {
           <div className="text-xl text-white font-semibold pb-5">
             Manager login
           </div>
+          {loginMutation.isError && <Error error={error} />}
+
           <div className="mt-4">
             <label
               htmlFor="email"

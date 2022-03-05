@@ -1,10 +1,9 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQueryClient, useMutation } from "react-query";
+import {  useMutation } from "react-query";
 import axios from "axios";
 import * as Yup from "yup";
-import { Login } from "../../../Hooks/useFetch";
 import Error from "../../Shared/Error";
 const AdminSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -16,9 +15,16 @@ const AdminLoginForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  const loginMutation = useMutation((values) =>
-    axios.post("http://localhost:4000/api/admin/login", values) , {
-      onSuccess: () => sessionStorage.setItem("user" , "admin"),
+  const loginMutation = useMutation(
+    (values) => axios.post("http://localhost:4000/api/admin/login", values),
+    {
+      onSuccess: () => {
+        sessionStorage.setItem("user", "admin");
+        navigate("/adminDash");
+      },
+      onError: () => {
+        setError("wrong creds");
+      },
     }
   );
   return (
@@ -29,11 +35,7 @@ const AdminLoginForm = () => {
       }}
       validationSchema={AdminSchema}
       onSubmit={async (values) => {
-        loginMutation.mutate(values, {
-          onSuccess: () => {
-            navigate("/adminDash");
-          },
-        });
+        loginMutation.mutate(values);
       }}
     >
       {({ errors, touched }) => (
@@ -41,7 +43,7 @@ const AdminLoginForm = () => {
           <h1 className="font-bold text-gray-300 text-xl">
             Ministère de la santé Login
           </h1>
-          {isShowing && <Error error={error} />}
+          {loginMutation.isError && <Error error={error} />}
           <div className="mt-4">
             <label
               htmlFor="email"
