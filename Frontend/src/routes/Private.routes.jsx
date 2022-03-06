@@ -1,7 +1,7 @@
 import { Navigate, Route, useLocation } from "react-router-dom";
 const PrivateRoute = ({ children, user }) => {
   let location = useLocation();
-  const role = JSON.stringify(localStorage.getItem("user"));
+  const role = sessionStorage.getItem("user");
   return role === user ? (
     children
   ) : (

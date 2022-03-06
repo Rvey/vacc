@@ -16,9 +16,9 @@ const Routers = () => {
           <Route
             path="/AdminDash"
             element={
-              <AdminDash />
-              // <PrivateRoute user="admin">
-              // </PrivateRoute>
+              <PrivateRoute user="admin">
+                <AdminDash />
+              </PrivateRoute>
             }
           />
           <Route
