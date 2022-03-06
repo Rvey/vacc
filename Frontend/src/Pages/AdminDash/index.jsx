@@ -2,7 +2,7 @@ import ManagerTable from "../../components/ManagerTable";
 import Modal from "../../components/Modals";
 import { useState } from "react";
 import AddManagerForm from "../../components/Forms/AddManagerForm";
-import Stats from '../../components/Statistiques/Stat'
+import StatAdmin from '../../components/Statistiques/StatAdmin'
 
 
 const AdminDash = () => {
@@ -25,7 +25,7 @@ const AdminDash = () => {
         <ManagerTable />
         </div>
 
-        <Stats 
+        <StatAdmin 
           title={"Manager per region"}
           role={"managers"}
         />

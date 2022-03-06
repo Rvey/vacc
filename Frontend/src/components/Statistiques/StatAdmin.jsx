@@ -9,11 +9,6 @@ export default function Stat({title, role}) {
   const query = useQuery(role, async () => {
     const { data } = await axios
       .get(`http://localhost:4000/api/${role}`)
-      .then(data=>(
-        data.forEach(element => {
-          region.push(element.region);
-        })
-      ))
     return data;
   });
 
@@ -27,7 +22,6 @@ export default function Stat({title, role}) {
   }
 
 
-  console.log(region);
   const optionsRadial = {
     series: managerRegion,
     options: {
@@ -56,7 +50,6 @@ export default function Stat({title, role}) {
           }
         }
       },
-      // colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
       labels: region,
       legend: {
         show: true,

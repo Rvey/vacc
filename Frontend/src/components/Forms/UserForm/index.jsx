@@ -102,7 +102,7 @@ const UserForm = () => {
                       htmlFor="street-address"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Street address
+                      Center
                     </label>
                     <Field
                       type="text"

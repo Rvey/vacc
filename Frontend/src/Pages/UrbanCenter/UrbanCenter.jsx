@@ -2,7 +2,7 @@ import { useState } from "react"
 import AddUrbanCenterForm from "../../components/Forms/AddUrbanCenter"
 import Modal from "../../components/Modals"
 import UrbanCenterTable from "../../components/UrbanCenterTable"
-import Stats from '../../components/Statistiques/Stat'
+import StatManager from '../../components/Statistiques/StatManager'
 import { useQuery } from "react-query";
 import axios from "axios";
 
@@ -26,17 +26,24 @@ const UrbanCenter = () => {
             Add UrbanCenter
           </button>
         </div>
+        <div className="flex">
+        <div className="w-full">
         <UrbanCenterTable />
+        </div>
+        <StatManager 
+            role = {'urbanCenter'}
+            StatistiqueTitle = {'Vaccin per region'}
+        />
+       </div>
+
+
+
         <Modal
           isOpen={open}
           title={"Add Urban Center"}
           setIsOpen={setIsOpen}
           component={<AddUrbanCenterForm setIsOpen={setIsOpen} isOpen={open} /> }
-          />
-          <Stats 
-              UrbanCenterData = {query}
-              StatistiqueTitle = {'Vaccin'}
-          />
+        />
       </div>
     )
 }
