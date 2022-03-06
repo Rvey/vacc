@@ -45,7 +45,7 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
     >
       {({ errors, touched }) => (
         <Form>
-          {addMutation.isError && <Error error="manager already exist" />}
+          {addMutation.isError && <Error error="manager Or region already exist" />}
           <div className="mt-4">
             <label
               htmlFor="firstName"
@@ -124,9 +124,9 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
                   </option>
                 ))}
             </Field>
-            {errors.email && touched.email ? (
+            {errors.region && touched.region ? (
               <div className="text-red-500 font-semibold dark:text-red-400">
-                {errors.email}
+                {errors.region}
               </div>
             ) : null}
           </div>

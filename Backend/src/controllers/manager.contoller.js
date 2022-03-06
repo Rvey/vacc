@@ -34,9 +34,10 @@ const store = async (req, res) => {
             return res.status(400).json({ message: "Please fill all the fields" })
 
         const existingManager = await manager.findOne({ email })
+        const existingManagerRegion = await manager.findOne({ region })
 
-        if (existingManager)
-            return res.status(400).json({ message: "Manager already exists" })
+        if (existingManager) return res.status(400).json({ message: "Manager already exists" })
+        if (existingManagerRegion) return res.status(400).json({ message: "Region already exists" })
 
         let password = Math.random().toString(20).substring(2, 10)
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -46,7 +47,7 @@ const store = async (req, res) => {
             firstName: firstName,
             lastName: lastName,
             password: hashedPassword,
-            region
+            region: region
         })
 
         managerAccount(email , lastName , firstName , password)

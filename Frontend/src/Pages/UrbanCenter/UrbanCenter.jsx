@@ -9,10 +9,11 @@ import axios from "axios";
 const UrbanCenter = () => {
     const [open , setIsOpen]  = useState(false)
       // Queries
-  const query = useQuery("urbanCenter", async () => {
-    const { data } = await axios.get("http://localhost:4000/api/urbanCenter");
-    return data;
-  });
+      const query = useQuery("urbanCenter", async () => {
+        const { data } = await axios.get("http://localhost:4000/api/urbanCenter");
+        return data;
+      });
+      
     return (
         <div className="w-[90%] mx-auto">
         <div className="flex justify-between items-center">
@@ -34,7 +35,7 @@ const UrbanCenter = () => {
           />
           <Stats 
               UrbanCenterData = {query}
-              StatistiqueTitle = {'Manage Urban'}
+              StatistiqueTitle = {'Vaccin'}
           />
       </div>
     )

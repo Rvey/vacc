@@ -4,9 +4,9 @@ import { useState } from "react";
 import AddManagerForm from "../../components/Forms/AddManagerForm";
 import Stats from '../../components/Statistiques/Stat'
 
+
 const AdminDash = () => {
   const [open, setIsOpen] = useState(false);
-  
 
   return (
     <div className="w-[100%]">
@@ -26,8 +26,8 @@ const AdminDash = () => {
         </div>
 
         <Stats 
-          title={"center per region"}
-
+          title={"Manager per region"}
+          role={"managers"}
         />
        </div>
        <Modal

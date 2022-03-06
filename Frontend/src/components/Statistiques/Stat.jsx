@@ -1,10 +1,35 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
+import { useQuery } from "react-query";
+import axios from "axios";
+
+export default function Stat({title, role}) {
 
 
-const optionsRadial = {
-          
-    series: [76, 67, 61, 90],
+  const query = useQuery(role, async () => {
+    const { data } = await axios
+      .get(`http://localhost:4000/api/${role}`)
+      .then(data=>(
+        data.forEach(element => {
+          region.push(element.region);
+        })
+      ))
+    return data;
+  });
+
+  const region = [];
+  const managerRegion = [];
+  if(query.data){
+    query.data.map((element, index) => {
+        region.push(element.region)
+        managerRegion.push(100)
+      });
+  }
+
+
+  console.log(region);
+  const optionsRadial = {
+    series: managerRegion,
     options: {
       chart: {
         height: 390,
@@ -17,7 +42,7 @@ const optionsRadial = {
           endAngle: 270,
           hollow: {
             margin: 5,
-            size: '30%',
+            size: '28%',
             background: 'transparent',
             image: undefined,
           },
@@ -31,15 +56,15 @@ const optionsRadial = {
           }
         }
       },
-      colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-      labels: ['Vimeo', 'Messenger', 'Facebook', 'LinkedIn'],
+      // colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+      labels: region,
       legend: {
         show: true,
         floating: true,
-        fontSize: '16px',
+        fontSize: '10px',
         position: 'left',
         offsetX: 160,
-        offsetY: 15,
+        offsetY: 1,
         labels: {
           useSeriesColors: true,
         },
@@ -47,10 +72,11 @@ const optionsRadial = {
           size: 0
         },
         formatter: function(seriesName, opts) {
-          return seriesName + ": " + opts.w.globals.series[opts.seriesIndex]
+          return seriesName 
+          // + ": " + opts.w.globals.series[opts.seriesIndex]
         },
         itemMargin: {
-          vertical: 3
+          vertical: 0
         }
       },
       responsive: [{
@@ -64,15 +90,12 @@ const optionsRadial = {
     },
 }
 
-
-
-export default function Stat() {
   return (
     <div className="  right-0 left-0 w-full top-4  h-modal  md:inset-0">
         <div className=" px-4 w-full  md:h-auto">
             <div className=" bg-white rounded-lg shadow dark:bg-gray-700">
                 <div className="px-6 pb-4 pt-6 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" >
-                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
+                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">{title} statistique</h3>
                     <div>
                         <ReactApexChart    
                             options = {optionsRadial.options}
