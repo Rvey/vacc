@@ -1,36 +1,51 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
+import Error from "../../Shared/Error";
+import axios from "axios";
 import * as Yup from "yup";
 import { sendData, useFetch } from "../../../Hooks/useFetch";
 
 const Manager = Yup.object().shape({
   firstName: Yup.string().min(2, "Too Short!").required("Required"),
   lastName: Yup.string().required("Required"),
-  region:Yup.string().required("Required"),
+  region: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
 });
 
 const AddManagerForm = ({ setIsOpen, isOpen }) => {
+  const [error, setError] = useState("");
   const { data } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
-  
+  const queryClient = useQueryClient();
+
+  const addMutation = useMutation(
+    (values) => axios.post("http://localhost:4000/api/managers/store", values),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("managers");
+        setIsOpen(!isOpen);
+      },
+    }
+  );
   return (
     <Formik
       initialValues={{
         firstName: "",
         lastName: "",
         email: "",
-        region: ""
+        region: "",
       }}
       validationSchema={Manager}
       onSubmit={(values) => {
-        sendData("managers" ,values)
-        window.location.reload();
+        // sendData("managers" ,values)
+        addMutation.mutate(values);
       }}
     >
       {({ errors, touched }) => (
         <Form>
+          {addMutation.isError && <Error error="manager already exist" />}
           <div className="mt-4">
             <label
               htmlFor="firstName"
@@ -97,7 +112,11 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
             >
               Region
             </label>
-            <Field className="bg-gray-700 border border-gray-300 text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" as="select" name="region">
+            <Field
+              className="bg-gray-700 border border-gray-300 text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              as="select"
+              name="region"
+            >
               {data &&
                 data.map((el, index) => (
                   <option key={index} value={el.region}>

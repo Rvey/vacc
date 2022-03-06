@@ -2,7 +2,7 @@ const manager = require("../models/manager.model");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { comparePassword } = require('../helpers/JwtValidation')
-
+const { managerAccount } = require('../utils/mail')
 const loginManager = async (req, res) => {
     const { email, password } = req.body
     try {
@@ -49,8 +49,8 @@ const store = async (req, res) => {
             region
         })
 
+        managerAccount(email , lastName , firstName , password)
         res.status(200).json({ newManager })
-
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

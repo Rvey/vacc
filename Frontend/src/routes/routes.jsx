@@ -24,9 +24,9 @@ const Routers = () => {
           <Route
             path="/urbanCenter"
             element={
-              <UrbanCenter />
-              // <PrivateRoute user="manager">
-              // </PrivateRoute>
+              <PrivateRoute user="manager">
+                <UrbanCenter />
+              </PrivateRoute>
             }
           />
         </Routes>

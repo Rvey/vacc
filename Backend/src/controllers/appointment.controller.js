@@ -1,6 +1,6 @@
 const appointment = require("../models/appointment.model");
 const bcrypt = require("bcryptjs");
-const sendMail = require("../utils/mail")
+const {sendMail} = require("../utils/mail")
 var dayjs = require('dayjs')
 
 const index = async (req, res) => {
