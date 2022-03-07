@@ -1,6 +1,6 @@
 const appointment = require("../models/appointment.model");
 const bcrypt = require("bcryptjs");
-const {sendMail} = require("../utils/mail")
+const { sendMail } = require("../utils/mail")
 var dayjs = require('dayjs')
 
 const index = async (req, res) => {
@@ -26,8 +26,7 @@ const show = async (req, res) => {
 const store = async (req, res, next) => {
   const { email, firstName, lastName, age, address, Cin, VaccNumber, phone, chronicDisease, SideEffectDesc } = req.body;
   try {
-    // if (!email || !firstName || !lastName || !age || !adress || !CIN || !vaccinNumber || !phoneNumber || !manager )
-    //   return res.status(400).json({ message: "Please fill all the fields" });
+
 
     const existingEmail = await appointment.findOne({ email });
 

@@ -5,6 +5,7 @@ import AdminLogin from "../Pages/AdminLogin";
 import AdminDash from "../Pages/AdminDash";
 import ManagerLogin from "../Pages/ManagerLogin";
 import UrbanCenter from "../Pages/UrbanCenter/UrbanCenter";
+import NationalManager from "../Pages/NationalManager";
 const Routers = () => {
   return (
     <BrowserRouter>
@@ -27,6 +28,14 @@ const Routers = () => {
               <PrivateRoute user="manager">
                 <UrbanCenter />
               </PrivateRoute>
+            }
+          />
+          <Route
+            path="/nationalManager"
+            element={
+             
+                <NationalManager />
+            
             }
           />
         </Routes>
