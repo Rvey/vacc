@@ -1,4 +1,4 @@
-const GNManager = require("../models/nationalManager.model")
+const GNManager = require("../models/generalNManager.model")
 
 const loginGNM = async (req, res) => {
     const { email, password } = req.body

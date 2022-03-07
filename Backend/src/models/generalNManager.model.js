@@ -11,4 +11,4 @@ const GNMSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('GNMSchema', GNMSchema)
+module.exports = mongoose.model('generalNManager', GNMSchema)

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { comparePassword } = require('../helpers/JwtValidation')
 const { managerAccount } = require('../utils/mail')
-const loginManager = async (req, res) => {
+const NManagerLogin = async (req, res) => {
     const { email, password } = req.body
     try {
         if (!email || !password)
@@ -57,7 +57,7 @@ const store = async (req, res) => {
     }
 }
 
-const deleteManager = async (req, res) => {
+const deleteNManager = async (req, res) => {
     const { id } = req.params
     try {
         await nationalManager.findByIdAndDelete(id)
@@ -70,7 +70,7 @@ const deleteManager = async (req, res) => {
 
 module.exports = {
     index,
-    loginManager,
+    NManagerLogin,
     store,
-    deleteManager
+    deleteNManager
 };
