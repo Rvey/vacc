@@ -5,10 +5,12 @@ import Modal from "../Modals";
 import axios from "axios";
 const NationalManagerTable = () => {
   const [open, setIsOpen] = useState(false);
-  const [managerId, setManagerId] = useState("");
+  const [NManagerId, setNManagerId] = useState("");
 
   const query = useQuery("managers", async () => {
-    const { data } = await axios.get("http://localhost:4000/api/nationalManager");
+    const { data } = await axios.get(
+      "http://localhost:4000/api/nationalManager"
+    );
     return data;
   });
 
@@ -64,7 +66,7 @@ const NationalManagerTable = () => {
                           type="button"
                           onClick={() => {
                             setIsOpen(!open);
-                            setManagerId(nationalManager._id);
+                            setNManagerId(nationalManager._id);
                           }}
                           className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-800"
                         >
@@ -84,7 +86,7 @@ const NationalManagerTable = () => {
             <ConfirmDelete
               isOpen={open}
               setIsOpen={setIsOpen}
-              managerId={managerId}
+              managerId={NManagerId}
             />
           }
         />

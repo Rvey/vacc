@@ -33,3 +33,5 @@ app.use('/api/generalNM', generalNM)
 app.listen(process.env.PORT, () => {
     console.log(`up and running at http://localhost:${process.env.PORT}`);
 })
+
+ 

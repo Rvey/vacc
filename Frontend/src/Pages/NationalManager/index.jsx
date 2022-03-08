@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NationalManagerTable from "../../components/NationalManagerTable";
+import AddNationalManagerForm from "../../components/Forms/AddNationalManager";
 import Modal from "../../components/Modals";
 const NationalManager = () => {
   const [open, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const NationalManager = () => {
         isOpen={open}
         title={"Add Urban Center"}
         setIsOpen={setIsOpen}
-        // component={<AddUrbanCenterForm setIsOpen={setIsOpen} isOpen={open} />}
+        component={<AddNationalManagerForm setIsOpen={setIsOpen} isOpen={open} />}
       />
     </div>
   );

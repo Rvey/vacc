@@ -19,8 +19,8 @@ const NManagerLogin = async (req, res) => {
 
 const index = async (req, res) => {
     try {
-        const nationalManager = await nationalManager.find()
-        res.status(200).json(nationalManager)
+        const nationalManagers = await nationalManager.find()
+        res.status(200).json(nationalManagers)
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
