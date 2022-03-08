@@ -6,6 +6,7 @@ import AdminDash from "../Pages/AdminDash";
 import ManagerLogin from "../Pages/ManagerLogin";
 import UrbanCenter from "../Pages/UrbanCenter/UrbanCenter";
 import NationalManager from "../Pages/NationalManager";
+import ManagePatient from "../Pages/ManagePatients";
 const Routers = () => {
   return (
     <BrowserRouter>
@@ -35,6 +36,14 @@ const Routers = () => {
             element={
              
                 <NationalManager />
+            
+            }
+          />
+               <Route
+            path="/patients"
+            element={
+             
+                <ManagePatient />
             
             }
           />
