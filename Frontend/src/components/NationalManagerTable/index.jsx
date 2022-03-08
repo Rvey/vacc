@@ -7,7 +7,7 @@ const NationalManagerTable = () => {
   const [open, setIsOpen] = useState(false);
   const [NManagerId, setNManagerId] = useState("");
 
-  const query = useQuery("managers", async () => {
+  const query = useQuery("nationalManager", async () => {
     const { data } = await axios.get(
       "http://localhost:4000/api/nationalManager"
     );

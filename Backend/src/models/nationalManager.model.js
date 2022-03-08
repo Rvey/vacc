@@ -17,6 +17,10 @@ const nationalManagerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    region: {
+        type: String,
+        required: true
+    },
 })
 
 module.exports = mongoose.model('nationalManager', nationalManagerSchema)
