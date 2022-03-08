@@ -24,7 +24,7 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res, next) => {
-  const { email, firstName, lastName, age, address, Cin, VaccNumber, phone, chronicDisease, SideEffectDesc } = req.body;
+  const { email, firstName, lastName, age, address, Cin, VaccNumber, phone, chronicDisease, SideEffectDesc, patientStatus, city , region } = req.body;
   try {
 
 
@@ -46,7 +46,10 @@ const store = async (req, res, next) => {
       chronicDisease,
       phone,
       SideEffectDesc,
-      date: date
+      date: date,
+      city ,
+      region,
+      patientStatus
     });
 
     sendMail(email, firstName, lastName, date)

@@ -65,7 +65,7 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
       onSubmit={(values) => {
         addMutation.mutate(values, {
           onSuccess: () => {
-            setIsOpen(!isOpen)
+            setIsOpen(!isOpen);
           },
         });
       }}

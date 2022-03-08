@@ -86,9 +86,10 @@ const PatientTable = () => {
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                       {dayjs(patient.date).format("YYYY-MM-DD") >
                       dayjs().format("YYYY-MM-DD")
-                        ? "asd"
-                        : "no"}
+                        ? "unvaccinated"
+                        : "vaccinated"}
                     </td>
+
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <div className="space-x-3">
