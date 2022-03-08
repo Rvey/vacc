@@ -7,7 +7,7 @@ const ManagePatient = () => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between">
-        <div className="w-[70%]">
+        <div className="">
           <div className="flex justify-between items-center w-[98%]">
             <h1 className="text-4xl font-black  py-14"> Manage Patients </h1>
             <button
@@ -20,7 +20,7 @@ const ManagePatient = () => {
           </div>
           <PatientTable />
         </div>
-        <div className="w-[30] py-14">ehe</div>
+        <div className="w-[30%] py-14">ehe</div>
       </div>
 
       <Modal
