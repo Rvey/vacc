@@ -54,6 +54,9 @@ const appointmentSchema = new mongoose.Schema({
     },
     region: {
         type: String
+    },
+    center: {
+        type: String
     }
 })
 

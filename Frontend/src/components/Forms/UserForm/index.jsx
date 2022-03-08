@@ -1,12 +1,27 @@
 import { Form, Formik, Field, useFormikContext } from "formik";
 import { useMutation } from "react-query";
+
 import axios from "axios";
 import { useState, useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
-import { sendData } from "../../../Hooks/useFetch";
 import MailConfirm from "../../MailConfirm";
 import { useFetch } from "../../../Hooks/useFetch";
+import * as Yup from "yup";
+
 import Error from "../../Shared/Error";
+
+const Patients = Yup.object().shape({
+  email: Yup.string().email("Invalid email address").required("Required"),
+  lastName: Yup.string().required("Required"),
+  firstName: Yup.string().required("Required"),
+  phone: Yup.string().required("Required"),
+  // address: Yup.string().required("Required"),
+  Cin: Yup.string().required("Required"),
+  region: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
+  center: Yup.string().required("Required"),
+});
+
 const City = () => {
   // Grab values and submitForm from context
   const { values } = useFormikContext();
@@ -40,6 +55,9 @@ const UserForm = () => {
   const { data, loading } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
+  const { data: center, loading: isLoading } = useFetch(
+    "http://localhost:4000/api/urbanCenter"
+  );
 
   const addMutation = useMutation((values) =>
     axios.post("http://localhost:4000/api/appointments/store", values)
@@ -61,20 +79,24 @@ const UserForm = () => {
           SideEffectDesc: checkResult.SideEffectDesc,
           region: "",
           city: "",
+          center: "",
         }}
+        validationSchema={Patients}
         onSubmit={(values) => {
           addMutation.mutate(values);
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          }) => (
-          <Form className=" pt-[5em] w-1/2 flex flex-col justify-between h-full">
-            <div className="px-4 py-5  sm:p-6">
-              <div className="flex flex-col gap-5">
+        {({ values, errors, touched }) => (
+          <Form className=" w-1/2 flex flex-col justify-between h-full">
+            <div className="px-1 py-5 sm:p-6">
+              <div className="flex justify-between items-center">
+                <div className="font-bold text-2xl pb-2 text-gray-800 ">
+                  Personal Info
+                </div>
+
                 {addMutation.isError && <Error error={"user already exist"} />}
+              </div>
+              <div className="flex flex-col gap-2">
                 <div className="">
                   <label
                     htmlFor="first-name"
@@ -136,6 +158,20 @@ const UserForm = () => {
                 </div>
                 <div className="">
                   <label
+                    htmlFor="address"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Address
+                  </label>
+                  <Field
+                    type="text"
+                    name="address"
+                    id="address"
+                    className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
+                  />
+                </div>
+                <div className="">
+                  <label
                     htmlFor="postal-code"
                     className="block text-sm font-medium text-gray-700"
                   >
@@ -148,7 +184,7 @@ const UserForm = () => {
                     className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none  "
                   />
                 </div>
-                <div className="mt-4">
+                <div className="">
                   <label
                     htmlFor="region"
                     className="block text-sm font-medium text-gray-700"
@@ -181,7 +217,7 @@ const UserForm = () => {
                     </div>
                   ) : null}
                 </div>
-                <div className="mt-4">
+                <div className="">
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
@@ -195,9 +231,38 @@ const UserForm = () => {
                     </div>
                   ) : null}
                 </div>
+                <div className="">
+                  <label
+                    htmlFor="region"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Center
+                  </label>
+                  <Field
+                    className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none "
+                    as="select"
+                    name="center"
+                  >
+                    <option value="" disabled>
+                      Select center
+                    </option>
+                    {center &&
+                      center.map((el, index) => (
+                        <option key={index} value={el.location}>
+                          {el.urbanCenter} - {el.location}
+                        </option>
+                      ))}
+                  </Field>
+                  {errors.center && touched.center ? (
+                    <div className="text-red-500 font-semibold dark:text-red-400">
+                      {errors.center}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
-            <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-3 mb-2 rounded-tr-md rounded-br-md shadow-md">
+            <div className="px-5"></div>
+            <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-3 mb-2 rounded-tr-md rounded-br-md shadow-md ">
               <button
                 type="button"
                 onClick={() => setStep(step - 1)}
