@@ -43,7 +43,7 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
         addMutation.mutate(values);
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched  }) => (
         <Form>
           {addMutation.isError && <Error error="manager Or region already exist" />}
           <div className="mt-4">

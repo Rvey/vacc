@@ -24,7 +24,7 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res, next) => {
-  const { email, firstName, lastName, age, address, Cin, VaccNumber, phone, chronicDisease, SideEffectDesc, patientStatus, city , region , center } = req.body;
+  const { email, firstName, lastName, age, address, Cin, VaccNumber, phone, chronicDisease, SideEffectDesc, patientStatus, city, region, center } = req.body;
   try {
 
 
@@ -47,7 +47,7 @@ const store = async (req, res, next) => {
       phone,
       SideEffectDesc,
       date: date,
-      city ,
+      city,
       region,
       patientStatus,
       center
@@ -60,6 +60,32 @@ const store = async (req, res, next) => {
   }
 };
 
+const updateStatus = async (req , res) => {
+
+  const { id } = req.params
+  const record = { _id: id }
+  try {
+    // const updateDoc = {
+    //   $set: {
+    //     status: "Vaccinated",
+    //   },
+    // };
+    // const result = await appointment.updateMany(filter,updateDoc)
+
+    // update status to Vaccinated when the date is greater than today
+
+    const result = await appointment.updateOne(record, {
+      $set: {
+        patientStatus: "Vaccinated",
+      },
+    });
+    res.status(200).json(result);
+
+
+  } catch (error) {
+
+  }
+}
 
 const destroy = async (req, res) => {
   const { id } = req.params;
@@ -77,4 +103,5 @@ module.exports = {
   show,
   store,
   destroy,
+  updateStatus
 };

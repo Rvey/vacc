@@ -31,22 +31,8 @@ const Routers = () => {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/nationalManager"
-            element={
-             
-                <NationalManager />
-            
-            }
-          />
-               <Route
-            path="/patients"
-            element={
-             
-                <ManagePatient />
-            
-            }
-          />
+          <Route path="/nationalManager" element={<NationalManager />} />
+          <Route path="/patients" element={<ManagePatient />} />
         </Routes>
       </div>
     </BrowserRouter>

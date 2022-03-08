@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import ConfirmDelete from "../ConfirmDelete";
+import UpdateStatus from "../UpdateStatus";
 import dayjs from "dayjs";
 import Modal from "../Modals";
 import axios from "axios";
@@ -54,10 +54,14 @@ const PatientTable = () => {
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Status
+                  vaccination Date
                 </th>
-                <th scope="col" className="relative py-3 px-6">
-                  <span className="sr-only">Edit</span>
+             
+                <th
+                  scope="col"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400 text-center"
+                >
+                  update Status
                 </th>
               </tr>
             </thead>
@@ -84,25 +88,32 @@ const PatientTable = () => {
                       {patient.phone}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      {dayjs(patient.date).format("YYYY-MM-DD") >
-                      dayjs().format("YYYY-MM-DD")
-                        ? "unvaccinated"
-                        : "vaccinated"}
+                      {patient.date}
                     </td>
-
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <div className="space-x-3">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setIsOpen(!open);
-                            setPatientIdId(patient._id);
-                          }}
-                          className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-800"
-                        >
-                          delete
-                        </button>
+                        {dayjs(patient.date).format("YYYY-MM-DD") >
+                        dayjs().format("YYYY-MM-DD") && patient.patientStatus !== 'Vaccinated' ? (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setIsOpen(!open);
+                              setPatientIdId(patient._id);
+                            }}
+                            className=" text-white hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                          >
+                            update status
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled
+                            className=" text-white bg-slate-700 rounded-lg text-sm px-5 py-2.5 text-center"
+                          >
+                            Vaccinated
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -114,10 +125,10 @@ const PatientTable = () => {
           isOpen={open}
           setIsOpen={setIsOpen}
           component={
-            <ConfirmDelete
+            <UpdateStatus
               isOpen={open}
               setIsOpen={setIsOpen}
-              managerId={patientId}
+              patientId={patientId}
             />
           }
         />

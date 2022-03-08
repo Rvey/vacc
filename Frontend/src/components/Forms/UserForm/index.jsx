@@ -15,7 +15,7 @@ const Patients = Yup.object().shape({
   lastName: Yup.string().required("Required"),
   firstName: Yup.string().required("Required"),
   phone: Yup.string().required("Required"),
-  // address: Yup.string().required("Required"),
+  address: Yup.string().required("Required"),
   Cin: Yup.string().required("Required"),
   region: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
@@ -59,8 +59,12 @@ const UserForm = () => {
     "http://localhost:4000/api/urbanCenter"
   );
 
-  const addMutation = useMutation((values) =>
-    axios.post("http://localhost:4000/api/appointments/store", values)
+  const addMutation = useMutation(
+    (values) =>
+      axios.post("http://localhost:4000/api/appointments/store", values),
+    {
+      onSuccess: () => setIsOpen(!isOpen),
+    }
   );
 
   return (

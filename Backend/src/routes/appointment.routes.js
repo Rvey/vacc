@@ -3,11 +3,13 @@ const router = express.Router();
 const {
     store,
     show,
-    destroy
+    destroy,
+    updateStatus
 } = require('../controllers/appointment.controller')
 
 router.get('/',show)
 router.post('/store', store)
 router.delete('/:id', destroy)
+router.put('/updateStatus/:id', updateStatus)
 
 module.exports = router;
