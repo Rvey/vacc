@@ -66,21 +66,23 @@ const updateStatus = async (req, res) => {
   const record = { _id: id }
   try {
     const patient = await appointment.findById(record)
+    const { email , firstName , lastName , date } = patient
     const current = dayjs(patient.date).format('DD/MM/YYYY')
-    const date = dayjs(current).add(1, 'month').format('DD/MM/YYYY')
+    const updatedDate = dayjs(current).add(1, 'month').format('DD/MM/YYYY')
 
     if (patient.VaccNumber === 'thirdVacc') {
       await appointment.updateOne(record, {
         $set: {
-          patientStatus: "Vaccinated"
-
+          patientStatus: "Vaccinated",
+          VaccNumber: "Vaccinated"
         },
+
       });
     } else if (patient.VaccNumber === 'secondVacc') {
       await appointment.updateOne(record, {
         $set: {
           VaccNumber: "thirdVacc",
-          date : date
+          date : updatedDate
 
         },
       });
@@ -88,9 +90,10 @@ const updateStatus = async (req, res) => {
       await appointment.updateOne(record, {
         $set: {
           VaccNumber: "secondVacc",
-          date : date
+          date : updatedDate
         },
       });
+      sendMail(email, firstName, lastName, updatedDate)
     }
 
 

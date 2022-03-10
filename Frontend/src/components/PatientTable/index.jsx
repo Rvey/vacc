@@ -19,41 +19,41 @@ const PatientTable = () => {
       <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
         <div className="overflow-hidden shadow-md sm:rounded-lg">
           <table className="min-w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700">
+            <thead className="bg-gray-100">
               <tr>
                 <th
                   scope="col"
-                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
                   FirstName
                 </th>
                 <th
                   scope="col"
-                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
                   LastName
                 </th>
                 <th
                   scope="col"
-                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
                   email
                 </th>
                 <th
                   scope="col"
-                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
                   Cin
                 </th>
                 <th
                   scope="col"
-                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
                   Phone
                 </th>
                 <th
                   scope="col"
-                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
                   vaccination
                 </th>
@@ -69,26 +69,23 @@ const PatientTable = () => {
             <tbody>
               {query &&
                 query.data?.map((patient, index) => (
-                  <tr
-                    key={index}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <tr key={index} className="bg-white border-b ">
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                       {patient.firstName}
                     </td>
-                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                       {patient.lastName}
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.email}
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.date}
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.phone}
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.VaccNumber === "firstVacc" ? (
                         <div className="flex">
                           <XSvg />
@@ -104,34 +101,36 @@ const PatientTable = () => {
                           <XSvg />
                           <XSvg />
                         </div>
-                      ) : null}
+                      ) : (
+                        "fully Vaccinated"
+                      )}
                     </td>
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <div className="space-x-3">
-                        {(dayjs(patient.date).format("YYYY-MM-DD") >
-                          dayjs().format("YYYY-MM-DD") &&
-                          patient.patientStatus !== "Vaccinated") 
-                     ? (
+                        {dayjs().format("DD/MM/YYYY") > patient.date ||
+                        patient.VaccNumber == "Vaccinated" ? (
+                          <button
+                            type="button"
+                            disabled
+                            className=" py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 bg-gray-100"
+                          >
+                            Vaccinated
+                          </button>
+                        ) : patient.VaccNumber === "firstVacc" ||
+                          "secondVacc" ||
+                          "thirdVacc" ? (
                           <button
                             type="button"
                             onClick={() => {
                               setIsOpen(!open);
                               setPatientIdId(patient._id);
                             }}
-                            className=" text-white hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                            className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
                           >
                             update status
                           </button>
-                        ) : (
-                          <button
-                            type="button"
-                            disabled
-                            className=" text-white bg-slate-700 rounded-lg text-sm px-5 py-2.5 text-center"
-                          >
-                            Vaccinated
-                          </button>
-                        )}
+                        ) : null}
                       </div>
                     </td>
                   </tr>
