@@ -39,7 +39,6 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
       }}
       validationSchema={Manager}
       onSubmit={(values) => {
-        // sendData("managers" ,values)
         addMutation.mutate(values);
       }}
     >

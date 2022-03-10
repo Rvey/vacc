@@ -11,7 +11,7 @@ const NManagerLogin = async (req, res) => {
         const existingAdmin = await nationalManager.findOne({ email })
         if (!existingAdmin) return res.status(404).json({ message: "nationalManager not found" })
         comparePassword(password, existingAdmin, res)
-        res.status(200).json({ message: "Login Successful" })
+        // res.status(200).json({ message: "Login Successful" })
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

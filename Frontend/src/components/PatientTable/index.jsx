@@ -4,6 +4,7 @@ import UpdateStatus from "../UpdateStatus";
 import dayjs from "dayjs";
 import Modal from "../Modals";
 import axios from "axios";
+import XSvg from "../Shared/XSvg";
 const PatientTable = () => {
   const [open, setIsOpen] = useState(false);
   const [patientId, setPatientIdId] = useState("");
@@ -54,9 +55,9 @@ const PatientTable = () => {
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                 >
-                  vaccination Date
+                  vaccination
                 </th>
-             
+
                 <th
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400 text-center"
@@ -82,19 +83,36 @@ const PatientTable = () => {
                       {patient.email}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      {patient.Cin}
+                      {patient.date}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                       {patient.phone}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      {patient.date}
+                      {patient.VaccNumber === "firstVacc" ? (
+                        <div className="flex">
+                          <XSvg />
+                        </div>
+                      ) : patient.VaccNumber === "secondVacc" ? (
+                        <div className="flex">
+                          <XSvg />
+                          <XSvg />
+                        </div>
+                      ) : patient.VaccNumber === "thirdVacc" ? (
+                        <div className="flex">
+                          <XSvg />
+                          <XSvg />
+                          <XSvg />
+                        </div>
+                      ) : null}
                     </td>
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <div className="space-x-3">
-                        {dayjs(patient.date).format("YYYY-MM-DD") >
-                        dayjs().format("YYYY-MM-DD") && patient.patientStatus !== 'Vaccinated' ? (
+                        {(dayjs(patient.date).format("YYYY-MM-DD") >
+                          dayjs().format("YYYY-MM-DD") &&
+                          patient.patientStatus !== "Vaccinated") 
+                     ? (
                           <button
                             type="button"
                             onClick={() => {

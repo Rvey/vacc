@@ -33,7 +33,7 @@ const store = async (req, res, next) => {
     if (existingEmail)
       return res.status(400).json({ message: "email already exists" });
 
-    const date = dayjs(new Date()).add(1, 'month').format('DD/MM/YYYY')
+    const date = dayjs().add(1, 'month').format('DD/MM/YYYY')
 
     const newAppointment = await appointment.create({
       email,
@@ -60,30 +60,47 @@ const store = async (req, res, next) => {
   }
 };
 
-const updateStatus = async (req , res) => {
+const updateStatus = async (req, res) => {
 
   const { id } = req.params
   const record = { _id: id }
   try {
-    // const updateDoc = {
-    //   $set: {
-    //     status: "Vaccinated",
-    //   },
-    // };
-    // const result = await appointment.updateMany(filter,updateDoc)
+    const patient = await appointment.findById(record)
+    const current = dayjs(patient.date).format('DD/MM/YYYY')
+    const date = dayjs(current).add(1, 'month').format('DD/MM/YYYY')
 
-    // update status to Vaccinated when the date is greater than today
+    if (patient.VaccNumber === 'thirdVacc') {
+      await appointment.updateOne(record, {
+        $set: {
+          patientStatus: "Vaccinated"
 
-    const result = await appointment.updateOne(record, {
-      $set: {
-        patientStatus: "Vaccinated",
-      },
-    });
-    res.status(200).json(result);
+        },
+      });
+    } else if (patient.VaccNumber === 'secondVacc') {
+      await appointment.updateOne(record, {
+        $set: {
+          VaccNumber: "thirdVacc",
+          date : date
+
+        },
+      });
+    } else if (patient.VaccNumber === 'firstVacc') {
+      await appointment.updateOne(record, {
+        $set: {
+          VaccNumber: "secondVacc",
+          date : date
+        },
+      });
+    }
+
+
+
+
+    res.status(200).json({ day: date });
 
 
   } catch (error) {
-
+    res.status(400).json(error.message);
   }
 }
 

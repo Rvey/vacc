@@ -3,15 +3,18 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { comparePassword } = require('../helpers/JwtValidation')
 const { managerAccount } = require('../utils/mail')
+
 const loginManager = async (req, res) => {
     const { email, password } = req.body
     try {
         if (!email || !password)
             return res.status(404).json({ message: "Please fill all the fields" })
-        const existingAdmin = await manager.findOne({ email })
-        if (!existingAdmin) return res.status(404).json({ message: "Manager not found" })
-        comparePassword(password, existingAdmin, res)
-         res.status(200).json({ message: "Login Successful" })
+        const existingManager = await manager.findOne({ email })
+        if (!existingManager) return res.status(404).json({ message: "Manager not found" })
+        comparePassword(password, existingManager, res)
+
+
+        // res.status(200).json({ message: "Login Successful" , manager : existingManager.password , password  })
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
@@ -28,7 +31,7 @@ const index = async (req, res) => {
 
 
 const store = async (req, res) => {
-    const { email, firstName, lastName , region } = req.body
+    const { email, firstName, lastName, region } = req.body
     try {
         if (!email || !firstName || !lastName)
             return res.status(400).json({ message: "Please fill all the fields" })
@@ -50,7 +53,7 @@ const store = async (req, res) => {
             region: region
         })
 
-        managerAccount(email , lastName , firstName , password)
+        managerAccount(email, lastName, firstName, password)
         res.status(200).json({ newManager })
     } catch (err) {
         res.status(400).json({ error: err.message })
