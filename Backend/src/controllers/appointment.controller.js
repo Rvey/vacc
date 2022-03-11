@@ -1,8 +1,6 @@
 const appointment = require("../models/appointment.model");
 const bcrypt = require("bcryptjs");
-const {
-  sendMail
-} = require("../utils/mail");
+const { sendMail } = require("../utils/mail");
 var dayjs = require("dayjs");
 
 const index = async (req, res) => {
@@ -13,7 +11,7 @@ const index = async (req, res) => {
     })
     .catch((err) => {
       res.status(400).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -24,7 +22,7 @@ const show = async (req, res) => {
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({
-      error: err.message
+      error: err.message,
     });
   }
 };
@@ -48,12 +46,12 @@ const store = async (req, res, next) => {
   } = req.body;
   try {
     const existingEmail = await appointment.findOne({
-      email
+      email,
     });
 
     if (existingEmail)
       return res.status(400).json({
-        message: "email already exists"
+        message: "email already exists",
       });
 
     const date = dayjs().add(1, "month").format("DD/MM/YYYY");
@@ -78,30 +76,23 @@ const store = async (req, res, next) => {
 
     sendMail(email, firstName, lastName, date);
     res.status(200).json({
-      newAppointment
+      newAppointment,
     });
   } catch (err) {
     res.status(400).json({
-      error: err.message
+      error: err.message,
     });
   }
 };
 
 const updateStatus = async (req, res) => {
-  const {
-    id
-  } = req.params;
+  const { id } = req.params;
   const record = {
-    _id: id
+    _id: id,
   };
   try {
     const patient = await appointment.findById(record);
-    const {
-      email,
-      firstName,
-      lastName,
-      date
-    } = patient;
+    const { email, firstName, lastName, date } = patient;
     const current = dayjs(patient.date).format("DD/MM/YYYY");
     const updatedDate = dayjs(current).add(1, "month").format("DD/MM/YYYY");
 
@@ -132,7 +123,7 @@ const updateStatus = async (req, res) => {
     }
 
     res.status(200).json({
-      day: date
+      day: date,
     });
   } catch (error) {
     res.status(400).json(error.message);
@@ -140,54 +131,44 @@ const updateStatus = async (req, res) => {
 };
 
 const updateNotVaccinated = async (req, res) => {
-  const {
-    id
-  } = req.params;
-  const record = {
-    _id: id
-  };
   try {
-    // const patient = await appointment.findById(record);
-    // const appointmentSchedule = patient.date;
     const currentDay = dayjs().format("DD/MM/YYYY");
 
-    await appointment.updateMany({ date: { $gt: currentDay } }, {
-      $set: {
-        VaccNumber: "yes sir",
+    await appointment.updateMany(
+      {
+        date: {
+          $lt: currentDay,
+        },
       },
-    })
-    // if (appointmentSchedule < currentDay) {
-    // }
-    // await appointment.updateOne(record, {
-    //   $set: {
-    //     patientStatus: "notVaccinated",
-    //     VaccNumber: "notVaccinated",
-    //   },
-    // });
+      {
+        $set: {
+          VaccNumber: "notVaccinated",
+          patientStatus: "notVaccinated",
+        },
+      }
+    );
 
     return res.status(200).json({
-      message: "day updated"
+      message: "day updated",
     });
   } catch (err) {
     res.status(400).json({
-      error: err.message
+      error: err.message,
     });
   }
 };
 
 const destroy = async (req, res) => {
-  const {
-    id
-  } = req.params;
+  const { id } = req.params;
   const record = {
-    _id: id
+    _id: id,
   };
   try {
     const result = await appointment.deleteOne(record);
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({
-      error: err.message
+      error: err.message,
     });
   }
 };

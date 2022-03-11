@@ -13,13 +13,8 @@ const ManagerSchema = Yup.object().shape({
 const NationalManagerForm = () => {
   let navigate = useNavigate();
   const [error, setError] = useState("");
-  const queryClient = useQueryClient();
-  const updateStatus = useMutation(
-    (id) =>
-      axios.put(`http://localhost:4000/api/appointments/updateNotVaccinated`),
-    {
-      onSuccess: () => queryClient.invalidateQueries("patient"),
-    }
+  const updateStatus = useMutation(() =>
+    axios.post(`http://localhost:4000/api/appointments/updateNotVaccinated`)
   );
 
   const loginMutation = useMutation(
