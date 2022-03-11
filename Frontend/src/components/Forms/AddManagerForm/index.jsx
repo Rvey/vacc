@@ -14,7 +14,6 @@ const Manager = Yup.object().shape({
 });
 
 const AddManagerForm = ({ setIsOpen, isOpen }) => {
-  const [error, setError] = useState("");
   const { data } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
@@ -42,9 +41,11 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
         addMutation.mutate(values);
       }}
     >
-      {({ errors, touched  }) => (
+      {({ errors, touched }) => (
         <Form>
-          {addMutation.isError && <Error error="manager Or region already exist" />}
+          {addMutation.isError && (
+            <Error error={"manager Or region already exist"} />
+          )}
           <div className="mt-4">
             <label
               htmlFor="firstName"

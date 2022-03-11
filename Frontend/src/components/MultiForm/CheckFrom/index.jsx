@@ -1,7 +1,7 @@
 import { Form, Formik, Field } from "formik";
 import CheckInput from "../../MultiForm/CheckInput";
 import { useContext } from "react";
-import { UserContext } from "../../Contexts/UserContext";
+import { UserContext } from "../../Context/UserContext";
 
 const CheckForm = () => {
  

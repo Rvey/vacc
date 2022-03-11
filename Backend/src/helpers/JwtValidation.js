@@ -3,24 +3,26 @@ const jwt = require('jsonwebtoken')
 
 const comparePassword = async (password, existingManager, res) => {
 
-        bcrypt.compare(password, existingManager.password).then(isCorrect => {
-            if (isCorrect) {
-                const payload = {
-                    id: existingManager._id,
-                    email: existingManager.email,
-                }
-                jwt.sign(payload, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '1h' }, (err, token) => {
-                    if (err) return res.json({ message: err.message })
-                    return res.status(200).json({
-                        token: token,
-                        email: existingManager.email,
-                    })
-                })
-            } else {
-                res.status(404).json({ message: "Invalid Username or password" })
+    bcrypt.compare(password, existingManager.password).then(isCorrect => {
+        if (isCorrect) {
+            const payload = {
+                id: existingManager._id,
+                email: existingManager.email,
             }
-        })
-    
+            jwt.sign(payload, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '1h' }, (err, token) => {
+                if (err) return res.json({ message: err.message })
+                return res.status(200).json({
+                    token: token,
+                    email: existingManager.email,
+                    role: existingManager.role,
+                    region: existingManager.region
+                })
+            })
+        } else {
+            res.status(404).json({ message: "Invalid Username or password" })
+        }
+    })
+
 }
 
 const verifyToken = (req, res, next, user) => {

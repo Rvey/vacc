@@ -21,6 +21,10 @@ const nationalManagerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        default: "nationalManager"
+    }
 })
 
 module.exports = mongoose.model('nationalManager', nationalManagerSchema)

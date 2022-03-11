@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {  useMutation } from "react-query";
+import { useMutation } from "react-query";
 import axios from "axios";
 import * as Yup from "yup";
 import Error from "../../Shared/Error";
@@ -18,8 +18,8 @@ const AdminLoginForm = () => {
   const loginMutation = useMutation(
     (values) => axios.post("http://localhost:4000/api/admin/login", values),
     {
-      onSuccess: () => {
-        sessionStorage.setItem("user", "admin");
+      onSuccess: async (data) => {
+        sessionStorage.setItem("user", JSON.stringify(data.data));
         navigate("/adminDash");
       },
       onError: () => {

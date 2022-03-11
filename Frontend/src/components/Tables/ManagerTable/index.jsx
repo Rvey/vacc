@@ -94,6 +94,7 @@ const ManagerTable = () => {
               isOpen={open}
               setIsOpen={setIsOpen}
               managerId={managerId}
+              user="managers"
             />
           }
         />

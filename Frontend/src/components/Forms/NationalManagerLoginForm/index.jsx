@@ -21,8 +21,8 @@ const NationalManagerForm = () => {
     (values) =>
       axios.post("http://localhost:4000/api/nationalManager/login", values),
     {
-      onSuccess: async () => {
-        sessionStorage.setItem("user", "nationalManager");
+      onSuccess: async (data) => {
+        sessionStorage.setItem("user", JSON.stringify(data.data));
         updateStatus.mutate();
         navigate("/patients");
       },

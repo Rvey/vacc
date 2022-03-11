@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 import axios from "axios";
 import { useState, useContext } from "react";
-import { UserContext } from "../../Contexts/UserContext";
+import { UserContext } from "../../Context/UserContext";
 import MailConfirm from "../../MailConfirm";
 import { useFetch } from "../../../Hooks/useFetch";
 import * as Yup from "yup";

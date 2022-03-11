@@ -17,8 +17,8 @@ const ManagerLoginForm = () => {
   const loginMutation = useMutation(
     (values) => axios.post("http://localhost:4000/api/managers/login", values),
     {
-      onSuccess: () => {
-        sessionStorage.setItem("user", "manager");
+      onSuccess: async (data) => {
+        sessionStorage.setItem("user", JSON.stringify(data.data));
         navigate("/urbanCenter");
       },
       onError: () => {

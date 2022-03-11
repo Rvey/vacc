@@ -87,6 +87,7 @@ const NationalManagerTable = () => {
               isOpen={open}
               setIsOpen={setIsOpen}
               managerId={NManagerId}
+              user="nationalManager"
             />
           }
         />

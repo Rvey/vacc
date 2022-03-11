@@ -3,13 +3,14 @@ const admin = require("../models/admin.model")
 
 const loginAdmin = async (req, res) => {
     const { email, password } = req.body
+    const role = 'admin'
     try {
         if (!email || !password)
             return res.status(404).json({ message: "Please fill all the fields" })
         const existingAdmin = await admin.findOne({ email })
         if (!existingAdmin) return res.status(404).json({ message: "admin not found" })
-        if (existingAdmin.password === password && existingAdmin.email === email) return res.status(200).json({ message: "Login Successful" })
-        res.status(400).json({message: "wrong creds"})
+        if (existingAdmin.password === password && existingAdmin.email === email)
+            return res.status(200).json({ email: existingAdmin.email, role: existingAdmin.role })
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

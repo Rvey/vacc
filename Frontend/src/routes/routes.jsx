@@ -22,17 +22,17 @@ const Routers = () => {
           <Route
             path="/AdminDash"
             element={
-              <PrivateRoute user="admin">
+              // <PrivateRoute user="admin">
+              // </PrivateRoute>
                 <AdminDash />
-              </PrivateRoute>
             }
           />
           <Route
             path="/urbanCenter"
             element={
-              <PrivateRoute user="manager">
+              // <PrivateRoute user="manager">
+              // </PrivateRoute>
                 <UrbanCenter />
-              </PrivateRoute>
             }
           />
           <Route path="/nationalManager" element={<NationalManager />} />

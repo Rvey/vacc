@@ -1,7 +1,7 @@
 import CheckForm from "./CheckFrom";
 import UserForm from "./UserForm";
 import { useState } from "react";
-import { UserContext } from "../Contexts/UserContext";
+import { UserContext } from "../Context/UserContext";
 import DocSvg from "../Shared/XSvg";
 const MultiForm = () => {
   const [step, setStep] = useState(1);

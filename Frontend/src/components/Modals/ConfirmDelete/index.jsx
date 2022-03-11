@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-const ConfirmDelete = ({ isOpen, setIsOpen, managerId }) => {
+const ConfirmDelete = ({ isOpen, setIsOpen, managerId , user }) => {
   const queryClient = useQueryClient();
   const deleteCenter = useMutation(
-    (id) => axios.delete(`http://localhost:4000/api/nationalManager/${id}`),
+    (id) => axios.delete(`http://localhost:4000/api/${user}/${id}`),
     {
-      onSuccess: () => queryClient.invalidateQueries("nationalManager"),
-    }
+      onSuccess: () => queryClient.invalidateQueries(`${user}`),
+    },
+ 
   );
   const handleDelete = (id) => {
     deleteCenter.mutate(id, {
