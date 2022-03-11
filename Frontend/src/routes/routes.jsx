@@ -7,10 +7,12 @@ import ManagerLogin from "../Pages/ManagerLogin";
 import UrbanCenter from "../Pages/UrbanCenter/UrbanCenter";
 import NationalManager from "../Pages/NationalManager";
 import ManagePatient from "../Pages/ManagePatients";
+import Navigation from "./Navigation";
 const Routers = () => {
   return (
     <BrowserRouter>
-      <div className="">
+     <Navigation /> 
+      <div className={`${true ? 'pl-[18em]  pr-[1.5em]' : ''}  bg-white min-h-screen `}>
         <Routes>
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/managerLogin" element={<ManagerLogin />} />

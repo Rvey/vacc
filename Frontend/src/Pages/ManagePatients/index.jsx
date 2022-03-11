@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Modal from "../../components/Modals";
 import PatientTable from "../../components/PatientTable";
+import MyResponsivePie from "../../components/Statistiques/Pie";
+
 const ManagePatient = () => {
   const [open, setIsOpen] = useState(false);
 
@@ -20,7 +22,10 @@ const ManagePatient = () => {
           </div>
           <PatientTable />
         </div>
-        <div className="w-[30%] py-14">ehe</div>
+        <div className="w-[25%] h-[40em] py-14">
+          
+          <MyResponsivePie />
+          </div>
       </div>
 
       <Modal

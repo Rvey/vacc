@@ -11,6 +11,7 @@ const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
   const handleDelete = (id) => {
     updateStatus.mutate(id, {
       onSuccess: () => {
+       
         setIsOpen(!isOpen);
       },
     });

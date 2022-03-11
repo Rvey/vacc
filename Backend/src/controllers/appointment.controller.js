@@ -66,7 +66,7 @@ const updateStatus = async (req, res) => {
   const record = { _id: id }
   try {
     const patient = await appointment.findById(record)
-    const { email , firstName , lastName , date } = patient
+    const { email, firstName, lastName, date } = patient
     const current = dayjs(patient.date).format('DD/MM/YYYY')
     const updatedDate = dayjs(current).add(1, 'month').format('DD/MM/YYYY')
 
@@ -78,19 +78,23 @@ const updateStatus = async (req, res) => {
         },
 
       });
+      sendMail(email, firstName, lastName, updatedDate)
+
     } else if (patient.VaccNumber === 'secondVacc') {
       await appointment.updateOne(record, {
         $set: {
           VaccNumber: "thirdVacc",
-          date : updatedDate
+          date: updatedDate
 
         },
       });
+      sendMail(email, firstName, lastName, updatedDate)
+
     } else if (patient.VaccNumber === 'firstVacc') {
       await appointment.updateOne(record, {
         $set: {
           VaccNumber: "secondVacc",
-          date : updatedDate
+          date: updatedDate
         },
       });
       sendMail(email, firstName, lastName, updatedDate)
@@ -104,6 +108,31 @@ const updateStatus = async (req, res) => {
 
   } catch (error) {
     res.status(400).json(error.message);
+  }
+}
+
+const updateNotVaccinated = async () => {
+  const { id } = req.params
+  const record = { _id: id }
+  try {
+    const patient = await appointment.findById(record)
+    const appointmentSchedule = dayjs(patient.date).format('DD/MM/YYYY')
+    const currentDay = dayjs().format('DD/MM/YYYY')
+
+    // if (appointmentSchedule > currentDay)
+    //   await appointment.updateOne(record, {
+    //     $set: {
+    //       patientStatus: "notVaccinated",
+    //       VaccNumber: "notVaccinated"
+    //     },
+
+    //   });
+
+    res.status(200).json(appointmentSchedule > currentDay)
+
+  }
+  catch (err) {
+    res.status(400).json({ error: err.message })
   }
 }
 
@@ -123,5 +152,6 @@ module.exports = {
   show,
   store,
   destroy,
-  updateStatus
+  updateStatus,
+  updateNotVaccinated
 };
