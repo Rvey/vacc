@@ -34,14 +34,14 @@ const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
         ></path>
       </svg>
       <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-        Are you sure you want send new schedule to that patient?
+        Are you sure you want send schedule to that patient?
       </h3>
       <button
         onClick={() => {
           handleDelete(patientId);
         }}
         type="button"
-        className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+        className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
       >
         Yes, I'm sure
       </button>

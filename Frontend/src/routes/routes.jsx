@@ -8,6 +8,8 @@ import UrbanCenter from "../Pages/UrbanCenter/UrbanCenter";
 import NationalManager from "../Pages/NationalManager";
 import ManagePatient from "../Pages/ManagePatients";
 import Navigation from "./Navigation";
+import NationalManagerLogin from "../Pages/NationalManagerLogin";
+
 const Routers = () => {
   return (
     <BrowserRouter>
@@ -34,7 +36,9 @@ const Routers = () => {
             }
           />
           <Route path="/nationalManager" element={<NationalManager />} />
+          <Route path="/nationalManagerLogin" element={<NationalManagerLogin />} />
           <Route path="/patients" element={<ManagePatient />} />
+       
         </Routes>
       </div>
     </BrowserRouter>

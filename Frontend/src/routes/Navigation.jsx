@@ -8,9 +8,8 @@ const Navigation = () => {
       <div className="flex flex-col flex-wrap justify-between h-full px-4">
         <div className="flex flex-col mt-4  md:mt-0 md:text-sm md:font-medium">
           <div className="flex">
-            
             <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">
-             Appointments
+              Appointments
             </span>
           </div>
           <div className="flex flex-col items-center bg-slate-700  mt-4 w-full py-6 rounded-lg  mb-4">
@@ -36,6 +35,19 @@ const Navigation = () => {
             </Link>
             <Link to="/urbanCenter" className={`${LinkStyle}`}>
               urbanCenter
+            </Link>
+
+            <Link to="/nationalManagerLogin" className={`${LinkStyle}`}>
+              nationalManagerLogin
+            </Link>
+            <Link to="/adminLogin" className={`${LinkStyle}`}>
+              adminLogin
+            </Link>
+            <Link to="/managerLogin" className={`${LinkStyle}`}>
+              managerLogin
+            </Link>
+            <Link to="/GNMLogin" className={`${LinkStyle}`}>
+              GNMLogin
             </Link>
           </>
         </div>

@@ -147,17 +147,23 @@ const updateNotVaccinated = async (req, res) => {
     _id: id
   };
   try {
-    const patient = await appointment.findById(record);
-    const appointmentSchedule = patient.date;
+    // const patient = await appointment.findById(record);
+    // const appointmentSchedule = patient.date;
     const currentDay = dayjs().format("DD/MM/YYYY");
 
-    if (appointmentSchedule < currentDay)
-      await appointment.updateOne(record, {
-        $set: {
-          patientStatus: "notVaccinated",
-          VaccNumber: "notVaccinated",
-        },
-      });
+    await appointment.updateMany({ date: { $gt: currentDay } }, {
+      $set: {
+        VaccNumber: "yes sir",
+      },
+    })
+    // if (appointmentSchedule < currentDay) {
+    // }
+    // await appointment.updateOne(record, {
+    //   $set: {
+    //     patientStatus: "notVaccinated",
+    //     VaccNumber: "notVaccinated",
+    //   },
+    // });
 
     return res.status(200).json({
       message: "day updated"
