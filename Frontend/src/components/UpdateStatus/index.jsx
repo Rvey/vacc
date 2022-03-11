@@ -4,9 +4,7 @@ const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
   const queryClient = useQueryClient();
   const updateStatus = useMutation(
     (id) =>
-      axios.put(
-        `http://localhost:4000/api/appointments/updateNotVaccinated/${id}`
-      ),
+      axios.put(`http://localhost:4000/api/appointments/updateStatus/${id}`),
     {
       onSuccess: () => queryClient.invalidateQueries("patient"),
     }
@@ -36,7 +34,7 @@ const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
         ></path>
       </svg>
       <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-        Are you sure you want to set send next schedule?
+        Are you sure you want send new schedule to that patient?
       </h3>
       <button
         onClick={() => {
