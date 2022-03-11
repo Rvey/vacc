@@ -108,15 +108,18 @@ const PatientTable = () => {
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <div className="space-x-3">
-                        {dayjs().format("DD/MM/YYYY") > patient.date ? (
-                          <button
-                            type="button"
-                            disabled
-                            className=" py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 bg-gray-100"
-                          >
-                            not Vaccinated
-                          </button>
-                        ) : patient.patientStatus === "Vaccinated" ? (
+                        {
+                        // dayjs().format("DD/MM/YYYY") > patient.date ? (
+                        //   <button
+                        //     type="button"
+                        //     disabled
+                        //     className=" py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 bg-gray-100"
+                        //   >
+                        //     not Vaccinated
+                        //   </button>
+                        // ) : 
+                        
+                        patient.patientStatus === "Vaccinated" ? (
                           <button
                             type="button"
                             disabled

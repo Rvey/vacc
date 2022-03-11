@@ -3,7 +3,10 @@ import axios from "axios";
 const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
   const queryClient = useQueryClient();
   const updateStatus = useMutation(
-    (id) => axios.put(`http://localhost:4000/api/appointments/updateStatus/${id}`),
+    (id) =>
+      axios.put(
+        `http://localhost:4000/api/appointments/updateNotVaccinated/${id}`
+      ),
     {
       onSuccess: () => queryClient.invalidateQueries("patient"),
     }
@@ -11,12 +14,10 @@ const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
   const handleDelete = (id) => {
     updateStatus.mutate(id, {
       onSuccess: () => {
-       
         setIsOpen(!isOpen);
       },
     });
   };
-
 
   return (
     <div className="p-6 pt-0 text-center">
@@ -35,7 +36,7 @@ const UpdateStatus = ({ isOpen, setIsOpen, patientId }) => {
         ></path>
       </svg>
       <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-        Are you sure you want to delete this Delivery Manager?
+        Are you sure you want to set send next schedule?
       </h3>
       <button
         onClick={() => {
