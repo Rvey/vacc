@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import ConfirmDelete from "../ConfirmDelete";
-import Modal from "../Modals";
+import ConfirmDelete from "../../Modals/ConfirmDelete";
+import Modal from "../../Modals";
 import axios from "axios";
 const ManagerTable = () => {
   const [open, setIsOpen] = useState(false);

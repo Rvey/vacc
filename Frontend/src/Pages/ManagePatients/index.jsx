@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "../../components/Modals";
-import PatientTable from "../../components/PatientTable";
+import PatientTable from "../../components/Tables/PatientTable";
 import MyResponsivePie from "../../components/Statistiques/Pie";
 
 const ManagePatient = () => {

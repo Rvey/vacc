@@ -3,9 +3,9 @@ import axios from "axios";
 const ConfirmDelete = ({ isOpen, setIsOpen, managerId }) => {
   const queryClient = useQueryClient();
   const deleteCenter = useMutation(
-    (id) => axios.delete(`http://localhost:4000/api/appointments/${id}`),
+    (id) => axios.delete(`http://localhost:4000/api/nationalManager/${id}`),
     {
-      onSuccess: () => queryClient.invalidateQueries("patient"),
+      onSuccess: () => queryClient.invalidateQueries("nationalManager"),
     }
   );
   const handleDelete = (id) => {

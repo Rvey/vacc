@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NationalManagerTable from "../../components/NationalManagerTable";
+import NationalManagerTable from "../../components/Tables/NationalManagerTable";
 import AddNationalManagerForm from "../../components/Forms/AddNationalManager";
 import Modal from "../../components/Modals";
 const NationalManager = () => {

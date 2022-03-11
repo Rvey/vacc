@@ -1,5 +1,5 @@
 import { Form, Formik, Field } from "formik";
-import CheckInput from "../../CheckInput";
+import CheckInput from "../../MultiForm/CheckInput";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 
