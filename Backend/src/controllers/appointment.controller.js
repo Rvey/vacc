@@ -54,7 +54,7 @@ const store = async (req, res, next) => {
         message: "email already exists",
       });
 
-    const date = dayjs().add(1, "month").toISOString();
+    const date = dayjs().add(1, "month");
 
     const newAppointment = await appointment.create({
       email,
@@ -67,7 +67,7 @@ const store = async (req, res, next) => {
       chronicDisease,
       phone,
       SideEffectDesc,
-      date: date,
+      date: dayjs(date).toISOString(),
       city,
       region,
       patientStatus,
@@ -93,8 +93,8 @@ const updateStatus = async (req, res) => {
   try {
     const patient = await appointment.findById(record);
     const { email, firstName, lastName, date } = patient;
-    const current = dayjs(patient.date).format("DD/MM/YYYY");
-    const updatedDate = dayjs(current).add(1, "month").format("DD/MM/YYYY");
+    const current = patient.date;
+    const updatedDate = dayjs(current).add(1, "month");
 
     if (patient.VaccNumber === "thirdVacc") {
       await appointment.updateOne(record, {
@@ -108,7 +108,7 @@ const updateStatus = async (req, res) => {
       await appointment.updateOne(record, {
         $set: {
           VaccNumber: "thirdVacc",
-          date: updatedDate,
+          date: dayjs(updatedDate).toISOString(),
         },
       });
       sendMail(email, firstName, lastName, updatedDate);
@@ -116,7 +116,7 @@ const updateStatus = async (req, res) => {
       await appointment.updateOne(record, {
         $set: {
           VaccNumber: "secondVacc",
-          date: updatedDate,
+          date: dayjs(updatedDate).toISOString(),
         },
       });
       sendMail(email, firstName, lastName, updatedDate);

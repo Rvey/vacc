@@ -1,7 +1,7 @@
 import { ResponsivePie } from "@nivo/pie";
 import { useQuery } from "react-query";
 import axios from "axios";
-const MyResponsivePie = ({ data /* see data tab */ }) => {
+const MyResponsivePie = () => {
   const query = useQuery("patient", async () => {
     const { data: uu } = await axios.get(
       `http://localhost:4000/api/appointments`

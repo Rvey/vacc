@@ -111,7 +111,7 @@ const PatientTable = () => {
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <div className="space-x-3">
-                        {dayjs().format("DD/MM/YYYY") > patient.date ? (
+                        {patient.patientStatus == "notVaccinated" ? (
                           <button
                             type="button"
                             disabled
