@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from "formik";
 import Error from "../../Shared/Error";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
 import { useState } from "react";
-import axios from "axios";
+import { LoginMutation } from "../../../Hooks/useFetch";
+import { useMutation } from "react-query";
+import axios from 'axios'
 import * as Yup from "yup";
 const ManagerSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -11,25 +11,9 @@ const ManagerSchema = Yup.object().shape({
 });
 
 const NationalManagerForm = () => {
-  let navigate = useNavigate();
-  const [error, setError] = useState("");
+  const { loginMutation, error } = LoginMutation("nationalManager");
   const updateStatus = useMutation(() =>
     axios.post(`http://localhost:4000/api/appointments/updateNotVaccinated`)
-  );
-
-  const loginMutation = useMutation(
-    (values) =>
-      axios.post("http://localhost:4000/api/nationalManager/login", values),
-    {
-      onSuccess: async (data) => {
-        sessionStorage.setItem("user", JSON.stringify(data.data));
-        updateStatus.mutate();
-        navigate("/patients");
-      },
-      onError: () => {
-        setError("wrong creds");
-      },
-    }
   );
   return (
     <Formik
@@ -39,7 +23,10 @@ const NationalManagerForm = () => {
       }}
       validationSchema={ManagerSchema}
       onSubmit={async (values) => {
-        loginMutation.mutate(values);
+        loginMutation.mutate(values)
+        updateStatus.mutate();
+       
+        
       }}
     >
       {({ errors, touched }) => (

@@ -13,7 +13,9 @@ const ManagePatient = () => {
           <div className="flex justify-between items-center w-[98%]">
             <h1 className="text-4xl font-black  py-14"> Manage Patients </h1>
             <button
-              onClick={() => setIsOpen(!open)}
+              onClick={() => {
+                setIsOpen(!open);
+              }}
               type="button"
               className="h-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
@@ -23,9 +25,8 @@ const ManagePatient = () => {
           <PatientTable />
         </div>
         <div className="w-[25%] h-[40em] py-14">
-          
           <MyResponsivePie />
-          </div>
+        </div>
       </div>
 
       <Modal

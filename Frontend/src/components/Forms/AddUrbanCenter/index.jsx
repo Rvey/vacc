@@ -44,16 +44,8 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
   const { data, loading } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
-  const queryClient = useQueryClient();
 
-  const addMutation = useMutation(
-    (values) =>
-      axios.post("http://localhost:4000/api/urbanCenter/store", values),
-    {
-      onSuccess: () => queryClient.invalidateQueries("urbanCenter"),
-    }
-  );
-
+  const { addMutation } = MutateData("urbanCenter", setIsOpen, isOpen);
   return (
     <Formik
       initialValues={{

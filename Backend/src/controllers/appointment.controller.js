@@ -54,7 +54,7 @@ const store = async (req, res, next) => {
         message: "email already exists",
       });
 
-    const date = dayjs().add(1, "month").format("DD/MM/YYYY");
+    const date = dayjs().add(1, "month").toISOString();
 
     const newAppointment = await appointment.create({
       email,
@@ -137,7 +137,7 @@ const updateNotVaccinated = async (req, res) => {
     await appointment.updateMany(
       {
         date: {
-          $lt: currentDay,
+          $lt: dayjs().toISOString(),
         },
       },
       {

@@ -34,7 +34,7 @@ export const deleteManager = (url, id) => {
     method: "DELETE",
   });
 };
-export const useFetch = (url) => {
+export const useFetch = (url , setIsOpen , isOpen) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -64,3 +64,48 @@ export const useFetch = (url) => {
 
   return { data, error, loading, refetch };
 };
+
+import { useQuery, useQueryClient, useMutation } from "react-query";
+
+// mutate data
+
+
+export const MutateData = (user , setIsOpen , isOpen) => {
+  const queryClient = useQueryClient();
+
+  const addMutation = useMutation(
+    (values) => axios.post(`http://localhost:4000/api/${user}/store`, values),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(user);
+        setIsOpen(!isOpen);
+      },
+    }
+  );
+
+  return { addMutation };
+};
+
+export const LoginMutation = (user) => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const updateStatus = useMutation(() =>
+    axios.post(`http://localhost:4000/api/appointments/updateNotVaccinated`)
+  );
+
+  const loginMutation = useMutation(
+    (values) => axios.post(`http://localhost:4000/api/${user}/login`, values),
+    {
+      onSuccess: async (data) => {
+        sessionStorage.setItem("user", JSON.stringify(data.data));
+        navigate("/patients");
+      },
+      onError: () => {
+        setError("wrong creds");
+      },
+    }
+  );
+  return { loginMutation, error };
+};
+
+export const FetchData = () => {};

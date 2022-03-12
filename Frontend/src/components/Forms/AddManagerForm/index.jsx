@@ -4,7 +4,8 @@ import { useState } from "react";
 import Error from "../../Shared/Error";
 import axios from "axios";
 import * as Yup from "yup";
-import { sendData, useFetch } from "../../../Hooks/useFetch";
+import { useFetch } from "../../../Hooks/useFetch";
+import { MutateData } from "../../../Hooks/useFetch";
 
 const Manager = Yup.object().shape({
   firstName: Yup.string().min(2, "Too Short!").required("Required"),
@@ -17,17 +18,8 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
   const { data } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
-  const queryClient = useQueryClient();
 
-  const addMutation = useMutation(
-    (values) => axios.post("http://localhost:4000/api/managers/store", values),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("managers");
-        setIsOpen(!isOpen);
-      },
-    }
-  );
+  const { addMutation } = MutateData("managers");
   return (
     <Formik
       initialValues={{
