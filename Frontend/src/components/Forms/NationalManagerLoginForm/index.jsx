@@ -1,7 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import Error from "../../Shared/Error";
-import { useState } from "react";
-import { LoginMutation } from "../../../Hooks/useFetch";
+import { LoginMutation } from "../../../Hooks/query";
 import { useMutation } from "react-query";
 import axios from 'axios'
 import * as Yup from "yup";
@@ -11,7 +10,7 @@ const ManagerSchema = Yup.object().shape({
 });
 
 const NationalManagerForm = () => {
-  const { loginMutation, error } = LoginMutation("nationalManager");
+  const { loginMutation, error } = LoginMutation("nationalManager" , "patients");
   const updateStatus = useMutation(() =>
     axios.post(`http://localhost:4000/api/appointments/updateNotVaccinated`)
   );

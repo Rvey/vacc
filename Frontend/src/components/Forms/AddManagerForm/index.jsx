@@ -1,11 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useMutation, useQueryClient } from "react-query";
-import { useState } from "react";
 import Error from "../../Shared/Error";
-import axios from "axios";
 import * as Yup from "yup";
 import { useFetch } from "../../../Hooks/useFetch";
-import { MutateData } from "../../../Hooks/useFetch";
+import { MutateData } from "../../../Hooks/query";
 
 const Manager = Yup.object().shape({
   firstName: Yup.string().min(2, "Too Short!").required("Required"),

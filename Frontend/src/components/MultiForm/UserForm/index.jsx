@@ -2,7 +2,8 @@ import { Form, Formik, Field, useFormikContext } from "formik";
 import { useState, useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
 import MailConfirm from "../../MailConfirm";
-import { MutateData, useFetch } from "../../../Hooks/useFetch";
+import { useFetch } from "../../../Hooks/useFetch";
+import { MutateData } from "../../../Hooks/query";
 import * as Yup from "yup";
 
 import Error from "../../Shared/Error";

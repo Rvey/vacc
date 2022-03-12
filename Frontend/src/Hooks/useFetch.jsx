@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useCookies } from 'react-cookie'
 import axios from "axios";
 
-export const useFetch = (url, setIsOpen, isOpen) => {
+export const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -34,50 +35,51 @@ export const useFetch = (url, setIsOpen, isOpen) => {
   return { data, error, loading, refetch };
 };
 
-// mutate data
+// export const MutateData = (user, setIsOpen, isOpen) => {
+//   const queryClient = useQueryClient();
 
-export const MutateData = (user, setIsOpen, isOpen) => {
-  const queryClient = useQueryClient();
+//   const addMutation = useMutation(
+//     (values) => axios.post(`http://localhost:4000/api/${user}/store`, values),
+//     {
+//       onSuccess: () => {
+//         queryClient.invalidateQueries(user);
+//         setIsOpen(!isOpen);
+//       },
+//     }
+//   );
 
-  const addMutation = useMutation(
-    (values) => axios.post(`http://localhost:4000/api/${user}/store`, values),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(user);
-        setIsOpen(!isOpen);
-      },
-    }
-  );
+//   return { addMutation };
+// };
 
-  return { addMutation };
-};
+// export const LoginMutation = (user , url) => {
+//   const navigate = useNavigate();
+//   const [cookies, setCookie] = useCookies();
+//   const [error, setError] = useState("");
+//   const updateStatus = useMutation(() =>
+//     axios.post(`http://localhost:4000/api/appointments/updateNotVaccinated`)
+//   );
 
-export const LoginMutation = (user) => {
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const updateStatus = useMutation(() =>
-    axios.post(`http://localhost:4000/api/appointments/updateNotVaccinated`)
-  );
+//   const loginMutation = useMutation(
+//     (values) => axios.post(`http://localhost:4000/api/${user}/login`, values),
+//     {
+//       onSuccess: async (data) => {
+//         // sessionStorage.setItem("user", JSON.stringify(data.data));
+//         setCookie('role', data.data.role );
+        
+//         navigate(`/${url}`);
+//       },
+//       onError: () => {
+//         setError("wrong creds");
+//       },
+//     }
+//   );
+//   return { loginMutation, error };
+// };
 
-  const loginMutation = useMutation(
-    (values) => axios.post(`http://localhost:4000/api/${user}/login`, values),
-    {
-      onSuccess: async (data) => {
-        sessionStorage.setItem("user", JSON.stringify(data.data));
-        // navigate("/patients");
-      },
-      onError: () => {
-        setError("wrong creds");
-      },
-    }
-  );
-  return { loginMutation, error };
-};
-
-export const FetchData = (user) => {
-  const query = useQuery(`${user}`, async () => {
-    const { data } = await axios.get(`http://localhost:4000/api/${user}`);
-    return data;
-  });
-  return { query };
-};
+// export const FetchData = (user) => {
+//   const query = useQuery(`${user}`, async () => {
+//     const { data } = await axios.get(`http://localhost:4000/api/${user}`);
+//     return data;
+//   });
+//   return { query };
+// };

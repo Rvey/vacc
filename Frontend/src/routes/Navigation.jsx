@@ -27,7 +27,7 @@ const Navigation = () => {
             <Link to="/patients" className={`${LinkStyle}`}>
               patients
             </Link>
-            <Link to="/Managers" className={`${LinkStyle}`}>
+            <Link to="/statistic" className={`${LinkStyle}`}>
               Manage Managers
             </Link>
             <Link to="/AdminDash" className={`${LinkStyle}`}>
@@ -46,17 +46,13 @@ const Navigation = () => {
             <Link to="/managerLogin" className={`${LinkStyle}`}>
               managerLogin
             </Link>
-            <Link to="/GNMLogin" className={`${LinkStyle}`}>
-              GNMLogin
-            </Link>
           </>
         </div>
         <div>
           <button
             type="button"
             onClick={() => {
-              dispatch(clearData());
-              <Navigate to={`/bomb`} />;
+             console.log('asdasdasdasd');
             }}
             className="text-white bg-gray-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
           >

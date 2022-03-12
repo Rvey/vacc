@@ -11,34 +11,56 @@ import Navigation from "./Navigation";
 import NationalManagerLogin from "../Pages/NationalManagerLogin";
 
 const Routers = () => {
+  
   return (
     <BrowserRouter>
-     <Navigation /> 
-      <div className={`${true ? 'pl-[18em]  pr-[1.5em]' : ''}  bg-white min-h-screen `}>
+      <Navigation />
+      <div
+        className={`${true ? "pl-[18em]  pr-[1.5em]" : ""
+          }  bg-white min-h-screen `}
+      >
         <Routes>
+          <Route path="/" element={<UserVaccine />} />
+
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/managerLogin" element={<ManagerLogin />} />
-          <Route path="/" element={<UserVaccine />} />
+          <Route path="/nationalManagerLogin" element={<NationalManagerLogin />} />
+
           <Route
             path="/AdminDash"
             element={
-              // <PrivateRoute user="admin">
-              // </PrivateRoute>
+              <PrivateRoute user="admin">
                 <AdminDash />
+              </PrivateRoute>
             }
           />
+
           <Route
             path="/urbanCenter"
             element={
-              // <PrivateRoute user="manager">
-              // </PrivateRoute>
+              <PrivateRoute user="manager">
                 <UrbanCenter />
+              </PrivateRoute>
             }
           />
-          <Route path="/nationalManager" element={<NationalManager />} />
-          <Route path="/nationalManagerLogin" element={<NationalManagerLogin />} />
-          <Route path="/patients" element={<ManagePatient />} />
-       
+
+          <Route
+            path="/patients"
+            element={
+              <PrivateRoute user="nationalManager">
+                <ManagePatient />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/nationalManager"
+            element={
+              <PrivateRoute user="admin">
+                <NationalManager />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>

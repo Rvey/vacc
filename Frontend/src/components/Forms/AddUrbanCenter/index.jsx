@@ -1,14 +1,7 @@
 import { Formik, Form, Field, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { useFetch } from "../../../Hooks/useFetch";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
-import axios from "axios";
+import { MutateData } from "../../../Hooks/query";
 
 const Urban = Yup.object().shape({
   urbanCenter: Yup.string().min(2, "Too Short!").required("Required"),
@@ -17,7 +10,6 @@ const Urban = Yup.object().shape({
 });
 
 const UrbanCenter = () => {
-  // Grab values and submitForm from context
   const { values } = useFormikContext();
   const { data } = useFetch(
     `https://calm-fjord-14795.herokuapp.com/api/villes/${values.region}`

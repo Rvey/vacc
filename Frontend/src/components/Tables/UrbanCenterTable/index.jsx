@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../../Modals";
 import ConfirmDeleteCenter from "../../Modals/ConfirmDeleteCenters";
-import { FetchData } from "../../../Hooks/useFetch";
+import { FetchData } from "../../../Hooks/query";
 
 const UrbanCenterTable = () => {
   const [open, setIsOpen] = useState(false);

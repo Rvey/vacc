@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import ConfirmDelete from "../../Modals/ConfirmDelete";
 import Modal from "../../Modals";
-import { FetchData } from "../../../Hooks/useFetch";
+import { FetchData } from "../../../Hooks/query";
 const ManagerTable = () => {
   const [open, setIsOpen] = useState(false);
   const [managerId, setManagerId] = useState("");

@@ -1,14 +1,14 @@
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Error from "../../Shared/Error";
-import { LoginMutation } from "../../../Hooks/useFetch";
+import { LoginMutation } from "../../../Hooks/query";
 const AdminSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
 const AdminLoginForm = () => {
-  const { loginMutation, error } = LoginMutation("admin");
+  const { loginMutation, error } = LoginMutation("admin" , "AdminDash");
   return (
     <Formik
       initialValues={{

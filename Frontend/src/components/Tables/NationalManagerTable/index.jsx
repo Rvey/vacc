@@ -2,7 +2,7 @@ import { useState } from "react";
 import ConfirmDelete from "../../Modals/ConfirmDelete";
 import Modal from "../../Modals";
 
-import { FetchData } from "../../../Hooks/useFetch";
+import { FetchData } from "../../../Hooks/query";
 const NationalManagerTable = () => {
   const [open, setIsOpen] = useState(false);
   const [NManagerId, setNManagerId] = useState("");

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import UpdateStatus from "../../Modals/UpdateStatus";
-import dayjs from "dayjs";
 import Modal from "../../Modals";
 import axios from "axios";
 import XSvg from "../../Shared/XSvg";
-import { FetchData } from "../../../Hooks/useFetch";
+
 const PatientTable = () => {
   const [open, setIsOpen] = useState(false);
   const [patientId, setPatientIdId] = useState("");

@@ -4,7 +4,8 @@ import { useState } from "react";
 import Error from "../../Shared/Error";
 import axios from "axios";
 import * as Yup from "yup";
-import { useFetch, MutateData } from "../../../Hooks/useFetch";
+import { MutateData } from "../../../Hooks/query";
+import { useFetch } from "../../../Hooks/useFetch";
 
 const Manager = Yup.object().shape({
   firstName: Yup.string().min(2, "Too Short!").required("Required"),
