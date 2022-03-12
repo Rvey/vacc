@@ -132,12 +132,13 @@ const updateStatus = async (req, res) => {
 
 const updateNotVaccinated = async (req, res) => {
   try {
-    const currentDay = dayjs().format("DD/MM/YYYY");
-
     await appointment.updateMany(
       {
         date: {
           $lt: dayjs().toISOString(),
+        },
+        patientStatus: {
+          $ne: "Vaccinated",
         },
       },
       {
