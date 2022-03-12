@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import ConfirmDelete from "../../Modals/ConfirmDelete";
 import Modal from "../../Modals";
-import axios from "axios";
+import { FetchData } from "../../../Hooks/useFetch";
 const ManagerTable = () => {
   const [open, setIsOpen] = useState(false);
   const [managerId, setManagerId] = useState("");
 
-  const query = useQuery("managers", async () => {
-    const { data } = await axios.get("http://localhost:4000/api/managers");
-    return data;
-  });
+  // const { data } = useQuery("managers", async () => {
+  //   const { data } = await axios.get("http://localhost:4000/api/managers");
+  //   return data;
+  // });
+
+  const { query } = FetchData("managers");
 
   return (
     <div>

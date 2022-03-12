@@ -1,18 +1,13 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
 import ConfirmDelete from "../../Modals/ConfirmDelete";
 import Modal from "../../Modals";
-import axios from "axios";
+
+import { FetchData } from "../../../Hooks/useFetch";
 const NationalManagerTable = () => {
   const [open, setIsOpen] = useState(false);
   const [NManagerId, setNManagerId] = useState("");
 
-  const query = useQuery("nationalManager", async () => {
-    const { data } = await axios.get(
-      "http://localhost:4000/api/nationalManager"
-    );
-    return data;
-  });
+  const { query } = FetchData("nationalManager");
 
   return (
     <div>

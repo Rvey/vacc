@@ -1,11 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import Error from "../../Shared/Error";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
-import { useState } from "react";
-import axios from "axios";
 import * as Yup from "yup";
-import { Login, LoginMutation } from "../../../Hooks/useFetch";
+import {  LoginMutation } from "../../../Hooks/useFetch";
 const ManagerSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),

@@ -1,18 +1,13 @@
 import { useState } from "react";
 import Modal from "../../Modals";
 import ConfirmDeleteCenter from "../../Modals/ConfirmDeleteCenters";
-import axios from "axios";
-import { useQuery } from "react-query";
+import { FetchData } from "../../../Hooks/useFetch";
 
 const UrbanCenterTable = () => {
   const [open, setIsOpen] = useState(false);
   const [center, setCenterId] = useState();
-  
-  // Queries
-  const query = useQuery("urbanCenter", async () => {
-    const { data } = await axios.get("http://localhost:4000/api/urbanCenter");
-    return data;
-  });
+
+  const { query } = FetchData("urbanCenter");
 
   return (
     <div>
