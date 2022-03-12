@@ -5,27 +5,15 @@ import { useMutation } from "react-query";
 import { useState } from "react";
 import axios from "axios";
 import * as Yup from "yup";
-import { Login } from "../../../Hooks/useFetch";
+import { Login, LoginMutation } from "../../../Hooks/useFetch";
 const ManagerSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
 const ManagerLoginForm = () => {
-  let navigate = useNavigate();
-  const [error, setError] = useState("");
-  const loginMutation = useMutation(
-    (values) => axios.post("http://localhost:4000/api/managers/login", values),
-    {
-      onSuccess: async (data) => {
-        sessionStorage.setItem("user", JSON.stringify(data.data));
-        navigate("/urbanCenter");
-      },
-      onError: () => {
-        setError("wrong creds");
-      },
-    }
-  );
+  const { loginMutation, error } = LoginMutation("managers");
+
   return (
     <Formik
       initialValues={{

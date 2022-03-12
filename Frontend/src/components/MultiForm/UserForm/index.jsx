@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
 import MailConfirm from "../../MailConfirm";
-import { useFetch } from "../../../Hooks/useFetch";
+import { MutateData, useFetch } from "../../../Hooks/useFetch";
 import * as Yup from "yup";
 
 import Error from "../../Shared/Error";
@@ -59,13 +59,7 @@ const UserForm = () => {
     "http://localhost:4000/api/urbanCenter"
   );
 
-  const addMutation = useMutation(
-    (values) =>
-      axios.post("http://localhost:4000/api/appointments/store", values),
-    {
-      onSuccess: () => setIsOpen(!isOpen),
-    }
-  );
+  const { addMutation } = MutateData("appointments", setIsOpen, isOpen);
 
   return (
     <>

@@ -98,7 +98,7 @@ export const LoginMutation = (user) => {
     {
       onSuccess: async (data) => {
         sessionStorage.setItem("user", JSON.stringify(data.data));
-        navigate("/patients");
+        // navigate("/patients");
       },
       onError: () => {
         setError("wrong creds");
