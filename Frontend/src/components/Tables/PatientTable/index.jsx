@@ -44,7 +44,7 @@ const PatientTable = () => {
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
-                  Vaccination date
+                 next Vaccination date
                 </th>
                 <th
                   scope="col"
@@ -56,13 +56,13 @@ const PatientTable = () => {
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
-                  region
+                  City
                 </th>
                 <th
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
-                  vaccination
+                  vaccination progress
                 </th>
                 <th
                   scope="col"
@@ -92,7 +92,7 @@ const PatientTable = () => {
                       {patient.phone}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                      {patient.region}
+                      {patient.city}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.VaccNumber === "firstVacc" ? (
