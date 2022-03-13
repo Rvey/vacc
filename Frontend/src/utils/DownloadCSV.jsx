@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { usePapaParse, useCSVDownloader } from "react-papaparse";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useFetch } from "../Hooks/useFetch";
 const DownloadCSV = () => {
   const { CSVDownloader, Type } = useCSVDownloader();
   const query = useQuery("patient", async () => {
@@ -9,6 +10,8 @@ const DownloadCSV = () => {
     return data;
   });
 
+  const { data } = useFetch("http://localhost:4000/api/appointments");
+  console.log(query?.data?.filter((el) => el.patientStatus == "notVaccinated"));
   return (
     <div>
       <label className="flex bg-navy-400 hover:bg-ehe-600 p-3 text-white cursor-pointer justify-center items-center rounded-md  tracking-wide ease-linear transition-all duration-150">
@@ -18,7 +21,7 @@ const DownloadCSV = () => {
           config={{
             delimiter: ";",
           }}
-          data={query.data}
+          data={query.data?.filter((el) => el.patientStatus == "notVaccinated")}
           filename={"tableData"}
         >
           <button className="h-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

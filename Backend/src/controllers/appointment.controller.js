@@ -109,6 +109,7 @@ const updateStatus = async (req, res) => {
         $set: {
           VaccNumber: "thirdVacc",
           date: dayjs(updatedDate).toISOString(),
+          thirdVacc: dayjs(updatedDate).toISOString(),
         },
       });
       sendMail(email, firstName, lastName, updatedDate);
@@ -117,6 +118,7 @@ const updateStatus = async (req, res) => {
         $set: {
           VaccNumber: "secondVacc",
           date: dayjs(updatedDate).toISOString(),
+          secondVacc: dayjs(updatedDate).toISOString(),
         },
       });
       sendMail(email, firstName, lastName, updatedDate);

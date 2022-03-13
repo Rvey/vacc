@@ -12,7 +12,7 @@ const ManagePatient = () => {
       <div className="flex justify-between">
         <div className="">
           <div className="flex justify-between items-center w-[98%]">
-            <h1 className="text-4xl font-black  py-14"> Manage Patients </h1>
+            <h1 className="text-4xl font-black  py-14">Manage Patients</h1>
             <DownloadCSV/>
           </div>
           <PatientTable />
@@ -26,7 +26,6 @@ const ManagePatient = () => {
         isOpen={open}
         title={"Download list"}
         setIsOpen={setIsOpen}
-        // component={<AddNationalManagerForm setIsOpen={setIsOpen} isOpen={open} />}
       />
     </div>
   );

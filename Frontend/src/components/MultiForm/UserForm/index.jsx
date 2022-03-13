@@ -1,5 +1,5 @@
 import { Form, Formik, Field, useFormikContext } from "formik";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
 import MailConfirm from "../../MailConfirm";
 import { useFetch } from "../../../Hooks/useFetch";
@@ -29,7 +29,7 @@ const City = () => {
 
   return (
     <Field
-      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none "
+      className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none"
       as="select"
       name="city"
     >
@@ -48,8 +48,10 @@ const City = () => {
 
 const UserForm = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // const { values } = useFormikContext();
+
   const { setStep, step, checkResult } = useContext(UserContext);
-  const regionRef = useRef(null);
 
   const { data, loading } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
@@ -57,6 +59,10 @@ const UserForm = () => {
   const { data: center, loading: isLoading } = useFetch(
     "http://localhost:4000/api/urbanCenter"
   );
+
+  // data?.map((map) => {
+
+  // })
 
   const { addMutation } = MutateData("appointments", setIsOpen, isOpen);
 
@@ -78,13 +84,13 @@ const UserForm = () => {
           city: "",
           center: "",
         }}
-        validationSchema={Patients}
+        // validationSchema={Patients}
         onSubmit={(values) => {
-          // addMutation.mutate(values);
-          console.log(values.region.id);
+          addMutation.mutate(values);
+          // console.log(values.region);
         }}
       >
-        {({ values, errors, touched }) => (
+        {({ values, errors, touched, handleChange }) => (
           <Form className=" w-1/2 flex flex-col justify-between h-full">
             <div className="px-1 py-5 sm:p-6">
               <div className="flex justify-between items-center">
@@ -195,7 +201,7 @@ const UserForm = () => {
                     </div>
                   )}
                   <Field
-                    className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none "
+                    className="mt-1 focus:ring-green-500 py-3 focus:border-green-500 block w-full shadow-sm sm:text-sm rounded-md border border-green-300 outline-none select"
                     as="select"
                     name="region"
                   >
@@ -204,7 +210,7 @@ const UserForm = () => {
                     </option>
                     {data &&
                       data.map((el, index) => (
-                        <option key={index} value={el.id} id={el.region} ref={regionRef}>
+                        <option key={index} value={el.id} id={el.region}>
                           {el.region}
                         </option>
                       ))}
@@ -245,11 +251,13 @@ const UserForm = () => {
                       Select center
                     </option>
                     {center &&
-                      center.map((el, index) => (
-                        <option key={index} value={el.location}>
-                          {el.urbanCenter} - {el.location}
-                        </option>
-                      ))}
+                      center
+                        .filter((el) => el.region == values.region)
+                        .map((el, index) => (
+                          <option key={index} value={el.location}>
+                            {el.urbanCenter} - {el.location}
+                          </option>
+                        ))}
                   </Field>
                   {errors.center && touched.center ? (
                     <div className="text-red-500 font-semibold dark:text-red-400">
