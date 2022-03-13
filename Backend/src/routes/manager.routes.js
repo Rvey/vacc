@@ -10,8 +10,8 @@ const {
 const { AdminAuth } = require("../middleware/auth.middleware")
 
 router.get('/', index)
-router.post('/store', AdminAuth, store)
-router.delete('/:id', AdminAuth, deleteManager)
+router.post('/store', store)
+router.delete('/:id', deleteManager)
 router.post('/login', loginManager)
 
 module.exports = router;

@@ -20,6 +20,9 @@ const Navigation = () => {
             <div className="px-2 text-xs bg-blue-300 mt-3 rounded-md uppercase">
               {cookies?.user?.role}
             </div>
+            <div className="px-2 text-xs bg-blue-300 mt-3 rounded-md uppercase">
+              {cookies?.user?.region}
+            </div>
           </div>
 
           <>

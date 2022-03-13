@@ -12,7 +12,7 @@ const { NationalManager, AdminAuth } = require("../middleware/auth.middleware")
 router.get('/', show)
 router.post('/store', store)
 router.delete('/:id', destroy)
-router.put('/updateStatus/:id', NationalManager, updateStatus)
-router.post('/updateNotVaccinated', NationalManager, updateNotVaccinated)
+router.put('/updateStatus/:id', updateStatus)
+router.post('/updateNotVaccinated', updateNotVaccinated)
 
 module.exports = router;

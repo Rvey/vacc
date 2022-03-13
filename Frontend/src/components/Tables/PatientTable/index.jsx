@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import UpdateStatus from "../../Modals/UpdateStatus";
 import Modal from "../../Modals";
 import axios from "axios";
+import dayjs from "dayjs";
 import XSvg from "../../Shared/XSvg";
 
 const PatientTable = () => {
@@ -43,7 +44,7 @@ const PatientTable = () => {
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
                 >
-                  Cin
+                  Vaccination date
                 </th>
                 <th
                   scope="col"
@@ -57,7 +58,12 @@ const PatientTable = () => {
                 >
                   vaccination
                 </th>
-
+                <th
+                  scope="col"
+                  className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase"
+                >
+                  region
+                </th>
                 <th
                   scope="col"
                   className="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400 text-center"
@@ -80,10 +86,13 @@ const PatientTable = () => {
                       {patient.email}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                      {patient.date}
+                      {dayjs(patient.date).format("DD/MM/YYYY")}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.phone}
+                    </td>
+                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+                      {patient.region}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                       {patient.VaccNumber === "firstVacc" ? (

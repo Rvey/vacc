@@ -1,5 +1,5 @@
 import { Form, Formik, Field, useFormikContext } from "formik";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { UserContext } from "../../Context/UserContext";
 import MailConfirm from "../../MailConfirm";
 import { useFetch } from "../../../Hooks/useFetch";
@@ -49,6 +49,7 @@ const City = () => {
 const UserForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { setStep, step, checkResult } = useContext(UserContext);
+  const regionRef = useRef(null);
 
   const { data, loading } = useFetch(
     "https://calm-fjord-14795.herokuapp.com/api/regions"
@@ -79,7 +80,8 @@ const UserForm = () => {
         }}
         validationSchema={Patients}
         onSubmit={(values) => {
-          addMutation.mutate(values);
+          // addMutation.mutate(values);
+          console.log(values.region.id);
         }}
       >
         {({ values, errors, touched }) => (
@@ -202,8 +204,8 @@ const UserForm = () => {
                     </option>
                     {data &&
                       data.map((el, index) => (
-                        <option key={index} value={el.id}>
-                          {el.id} - {el.region}
+                        <option key={index} value={el.id} id={el.region} ref={regionRef}>
+                          {el.region}
                         </option>
                       ))}
                   </Field>
