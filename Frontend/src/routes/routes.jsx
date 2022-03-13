@@ -9,22 +9,26 @@ import NationalManager from "../Pages/NationalManager";
 import ManagePatient from "../Pages/ManagePatients";
 import Navigation from "./Navigation";
 import NationalManagerLogin from "../Pages/NationalManagerLogin";
-
+import { useCookies } from "react-cookie";
 const Routers = () => {
-  
+  const [cookies, setCookie] = useCookies();
   return (
     <BrowserRouter>
-      <Navigation />
+      {cookies.user && <Navigation />}
       <div
-        className={`${true ? "pl-[18em]  pr-[1.5em]" : ""
-          }  bg-white min-h-screen `}
+        className={`${
+          cookies.user ? "pl-[13em]  pr-[1.5em]" : ""
+        }  bg-white min-h-screen `}
       >
         <Routes>
           <Route path="/" element={<UserVaccine />} />
 
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/managerLogin" element={<ManagerLogin />} />
-          <Route path="/nationalManagerLogin" element={<NationalManagerLogin />} />
+          <Route
+            path="/nationalManagerLogin"
+            element={<NationalManagerLogin />}
+          />
 
           <Route
             path="/AdminDash"

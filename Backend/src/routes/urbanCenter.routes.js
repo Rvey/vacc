@@ -6,9 +6,10 @@ const {
     index,
     deleteUrbanCenter
 } = require('../controllers/urbanCenter.controller')
+const { ManagerAuth } = require("../middleware/auth.middleware")
 
-router.get('/',index)
-router.post('/store', store)
-router.delete('/:id', deleteUrbanCenter)
+router.get('/', index)
+router.post('/store', ManagerAuth, store)
+router.delete('/:id', ManagerAuth, deleteUrbanCenter)
 
 module.exports = router;

@@ -33,7 +33,7 @@ export const LoginMutation = (user, url) => {
     {
       onSuccess: async (data) => {
         // sessionStorage.setItem("user", JSON.stringify(data.data));
-        setCookie("role", data.data.role);
+        setCookie("user", data.data);
 
         navigate(`/${url}`);
       },

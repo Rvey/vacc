@@ -8,8 +8,10 @@ const comparePassword = async (password, existingManager, res) => {
             const payload = {
                 id: existingManager._id,
                 email: existingManager.email,
+                role: existingManager.role,
+                region: existingManager.region
             }
-            jwt.sign(payload, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '1h' }, (err, token) => {
+            jwt.sign(payload, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '2h' }, (err, token) => {
                 if (err) return res.json({ message: err.message })
                 return res.status(200).json({
                     token: token,
@@ -30,9 +32,12 @@ const verifyToken = (req, res, next, user) => {
     if (token) {
         jwt.verify(token, `${process.env.JWT_SECRET_KEY}`, (err, decoded) => {
             if (err) return res.status(401).json({ message: "Failed To Authenticate" })
+            
+
             if (decoded.role === `${user}`) {
                 next()
             } else {
+
                 res.status(400).json({ message: `You need to be ${user} to access` })
             }
         })

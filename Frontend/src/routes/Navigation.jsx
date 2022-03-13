@@ -10,20 +10,20 @@ const Navigation = () => {
       <div className="flex flex-col flex-wrap justify-between h-full px-4">
         <div className="flex flex-col mt-4  md:mt-0 md:text-sm md:font-medium">
           <div className="flex">
-            <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">
-              Appointments
+            <span className="text-center text-lg font-semibold whitespace-nowrap dark:text-white">
+              COVID-22
             </span>
           </div>
           <div className="flex flex-col items-center bg-slate-700  mt-4 w-full py-6 rounded-lg  mb-4">
             <div className="h-20 w-20 rounded-full overflow-hidden">h</div>
-            <div className="text-sm font-semibold mt-3 text-white">email</div>
+            <div className="text-sm font-semibold mt-3 text-white">{cookies?.user?.email}</div>
             <div className="px-2 text-xs bg-blue-300 mt-3 rounded-md uppercase">
-              role
+              {cookies?.user?.role}
             </div>
           </div>
 
           <>
-            {cookies?.role !== "admin" && (
+            {cookies?.user?.role == "admin" && (
               <>
                 <Link to="/nationalManager" className={`${LinkStyle}`}>
                   national manager
@@ -39,13 +39,13 @@ const Navigation = () => {
               </>
             )}
 
-            {cookies?.role == "managers" && (
+            {cookies?.user?.role == "managers" && (
               <Link to="/urbanCenter" className={`${LinkStyle}`}>
                 urbanCenter
               </Link>
             )}
 
-            {cookies?.role == "nationalManager" && (
+            {cookies?.user?.role == "nationalManager" && (
               <Link to="/patients" className={`${LinkStyle}`}>
                 patients
               </Link>
@@ -66,9 +66,9 @@ const Navigation = () => {
           <button
             type="button"
             onClick={() => {
-              removeCookie("role");
+              removeCookie("user");
             }}
-            className="text-white bg-gray-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm  py-2.5  dark:bg-gray-600 dark:hover:bg-red-700 dark:focus:ring-red-800 w-full text-center"
+            className="text-white bg-gray-700 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm  py-2.5  dark:bg-gray-600 dark:hover:bg-red-700 dark:focus:ring-red-800 w-full text-center"
           >
             Log out
           </button>

@@ -10,11 +10,12 @@ const loginAdmin = async (req, res) => {
         const existingAdmin = await admin.findOne({ email });
         if (!existingAdmin)
             return res.status(404).json({ message: "admin not found" });
-        if (existingAdmin.password === password && existingAdmin.email === email) {
-            res.status(200).json(existingAdmin);
-        } else {
-            res.status(404).json({ message: error.message });
-        }
+        // if (existingAdmin.password === password && existingAdmin.email === email) {
+        //     res.status(200).json(existingAdmin);
+        // } else {
+        //     res.status(404).json({ message: error.message });
+        // }
+        comparePassword(password, existingAdmin, res)
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
