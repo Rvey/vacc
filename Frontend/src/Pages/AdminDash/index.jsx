@@ -9,18 +9,8 @@ const AdminDash = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      {/* <div className="flex justify-between items-center ">
-        <h1 className="text-4xl font-black pl-12  py-14">Managers</h1>
-        <button
-          onClick={() => setIsOpen(!open)}
-          type="button"
-          className="h-12 mr-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Add Managers
-        </button>
-      </div> */}
       <div className="flex justify-between">
-        <div className="w-[70%]">
+        <div className="w-[100%]">
           <div className="flex justify-between items-center w-[98%]">
             <h1 className="text-4xl font-black  py-14"> Managers </h1>
             <button
@@ -33,9 +23,9 @@ const AdminDash = () => {
           </div>
           <ManagerTable />
         </div>
-        <div className="w-[30%] py-14 ">
+        {/* <div className="w-[30%] py-14 ">
           <StatAdmin title={"Manager per region"} role={"managers"} />
-        </div>
+        </div> */}
       </div>
       <Modal
         isOpen={open}

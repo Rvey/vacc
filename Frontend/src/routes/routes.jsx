@@ -51,9 +51,9 @@ const Routers = () => {
           <Route
             path="/patients"
             element={
-              // <PrivateRoute user="nationalManager">
-              // </PrivateRoute>
+              <PrivateRoute user="nationalManager">
                 <ManagePatient />
+              </PrivateRoute>
             }
           />
 

@@ -112,9 +112,9 @@ const PatientTable = () => {
                         </div>
                       ) : patient.VaccNumber === "notVaccinated" ? (
                         "Not Vaccinated"
-                      ) : (
-                        "fully Vaccinated"
-                      )}
+                      ) : patient.VaccNumber === "Vaccinated"  ? (
+                        "fully Vaccinated" 
+                      ) : null}
                     </td>
 
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">

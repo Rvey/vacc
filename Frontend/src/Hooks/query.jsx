@@ -32,7 +32,6 @@ export const LoginMutation = (user, url) => {
     (values) => axios.post(`http://localhost:4000/api/${user}/login`, values),
     {
       onSuccess: async (data) => {
-        // sessionStorage.setItem("user", JSON.stringify(data.data));
         setCookie("user", data.data);
 
         navigate(`/${url}`);

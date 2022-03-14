@@ -11,7 +11,7 @@ const DownloadCSV = () => {
   });
 
   const { data } = useFetch("http://localhost:4000/api/appointments");
-  console.log(query?.data?.filter((el) => el.patientStatus == "notVaccinated"));
+  // console.log(query?.data?.filter((el) => el.patientStatus == "notVaccinated"));
   return (
     <div>
       <label className="flex bg-navy-400 hover:bg-ehe-600 p-3 text-white cursor-pointer justify-center items-center rounded-md  tracking-wide ease-linear transition-all duration-150">

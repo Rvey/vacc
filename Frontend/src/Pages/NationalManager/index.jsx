@@ -8,7 +8,7 @@ const NationalManager = () => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between">
-        <div className="w-[70%]">
+        <div className="w-[100%]">
           <div className="flex justify-between items-center w-[98%]">
             <h1 className="text-4xl font-black  py-14">
               {" "}
@@ -24,7 +24,7 @@ const NationalManager = () => {
           </div>
           <NationalManagerTable />
         </div>
-        <div className="w-[30] py-14">ehe</div>
+        {/* <div className="w-[30] py-14">ehe</div> */}
       </div>
 
       <Modal

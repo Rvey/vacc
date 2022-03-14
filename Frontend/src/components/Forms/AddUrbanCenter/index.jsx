@@ -9,10 +9,11 @@ const Urban = Yup.object().shape({
   location: Yup.string().required("Required"),
 });
 
-const UrbanCenter = () => {
-  const { values } = useFormikContext();
-  const { data } = useFetch(
-    `https://calm-fjord-14795.herokuapp.com/api/villes/${values.region}`
+const UrbanCenter = ({ data, region }) => {
+  let regionId = [];
+  regionId = data?.filter((el) => el.region === region)[0].id;
+  const { data: city } = useFetch(
+    `https://calm-fjord-14795.herokuapp.com/api/villes/${regionId}`
   );
 
   return (
@@ -22,8 +23,8 @@ const UrbanCenter = () => {
       name="location"
     >
       <option value="">Select a city</option>
-      {data &&
-        data?.map((el, index) => (
+      {city &&
+        city?.map((el, index) => (
           <option key={index} value={el.ville}>
             {el.ville}
           </option>
@@ -54,7 +55,7 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
         });
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, values }) => (
         <Form>
           <div className="mt-4">
             <label
@@ -98,7 +99,7 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
               </option>
               {data &&
                 data.map((el, index) => (
-                  <option key={index} value={el.id}>
+                  <option key={index} value={el.region}>
                     {el.id} - {el.region}
                   </option>
                 ))}
@@ -116,7 +117,9 @@ const AddUrbanCenterForm = ({ setIsOpen, isOpen }) => {
             >
               City / urban
             </label>
-            <UrbanCenter />
+            {data && values.region && (
+              <UrbanCenter data={data} region={values.region} />
+            )}
             {errors.location && touched.location ? (
               <div className="text-red-500 font-semibold dark:text-red-400">
                 {errors.location}

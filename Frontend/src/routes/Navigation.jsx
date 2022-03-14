@@ -53,16 +53,6 @@ const Navigation = () => {
                 patients
               </Link>
             )}
-
-            <Link to="/nationalManagerLogin" className={`${LinkStyle}`}>
-              nationalManagerLogin
-            </Link>
-            <Link to="/adminLogin" className={`${LinkStyle}`}>
-              adminLogin
-            </Link>
-            <Link to="/managerLogin" className={`${LinkStyle}`}>
-              managerLogin
-            </Link>
           </>
         </div>
         <div className="w-full flex justify-center">

@@ -9,7 +9,7 @@ const {
 const { ManagerAuth } = require("../middleware/auth.middleware")
 
 router.get('/', index)
-router.post('/store', ManagerAuth, store)
-router.delete('/:id', ManagerAuth, deleteUrbanCenter)
+router.post('/store', store)
+router.delete('/:id',  deleteUrbanCenter)
 
 module.exports = router;
