@@ -20,11 +20,12 @@ const Patients = Yup.object().shape({
   center: Yup.string().required("Required"),
 });
 
-const City = () => {
-  // Grab values and submitForm from context
-  const { values } = useFormikContext();
-  const { data } = useFetch(
-    `https://calm-fjord-14795.herokuapp.com/api/villes/${values.region}`
+const City = ({ data, region }) => {
+  let regionId = [];
+  regionId = data?.filter((el) => el.region === region)[0].id;
+
+  const { data: city } = useFetch(
+    `https://calm-fjord-14795.herokuapp.com/api/villes/${regionId}`
   );
 
   return (
@@ -36,8 +37,8 @@ const City = () => {
       <option value="" disabled>
         Select a city
       </option>
-      {data &&
-        data?.map((el, index) => (
+      {city &&
+        city?.map((el, index) => (
           <option key={index} value={el.ville}>
             {el.ville}
           </option>
@@ -49,8 +50,6 @@ const City = () => {
 const UserForm = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // const { values } = useFormikContext();
-
   const { setStep, step, checkResult } = useContext(UserContext);
 
   const { data, loading } = useFetch(
@@ -59,10 +58,6 @@ const UserForm = () => {
   const { data: center, loading: isLoading } = useFetch(
     "http://localhost:4000/api/urbanCenter"
   );
-
-  // data?.map((map) => {
-
-  // })
 
   const { addMutation } = MutateData("appointments", setIsOpen, isOpen);
 
@@ -85,9 +80,8 @@ const UserForm = () => {
           center: "",
         }}
         // validationSchema={Patients}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           addMutation.mutate(values);
-          // console.log(values.region);
         }}
       >
         {({ values, errors, touched, handleChange }) => (
@@ -210,7 +204,7 @@ const UserForm = () => {
                     </option>
                     {data &&
                       data.map((el, index) => (
-                        <option key={index} value={el.id} id={el.region}>
+                        <option key={index} value={el.region} id={el.region}>
                           {el.region}
                         </option>
                       ))}
@@ -228,7 +222,9 @@ const UserForm = () => {
                   >
                     City
                   </label>
-                  <City />
+                  {data && values.region && (
+                    <City data={data} region={values.region} />
+                  )}
                   {errors.location && touched.location ? (
                     <div className="text-red-500 font-semibold dark:text-red-400">
                       {errors.location}
