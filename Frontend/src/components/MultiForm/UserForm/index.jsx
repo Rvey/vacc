@@ -79,7 +79,7 @@ const UserForm = () => {
           city: "",
           center: "",
         }}
-        // validationSchema={Patients}
+        validationSchema={Patients}
         onSubmit={async (values) => {
           addMutation.mutate(values);
         }}

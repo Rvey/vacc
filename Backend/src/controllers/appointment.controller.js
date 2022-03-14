@@ -46,7 +46,7 @@ const store = async (req, res, next) => {
   } = req.body;
   try {
     const existingEmail = await appointment.findOne({
-      email,
+      email, 
     });
 
     if (existingEmail)
