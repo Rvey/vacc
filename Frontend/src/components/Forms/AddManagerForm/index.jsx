@@ -16,7 +16,7 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
     "https://calm-fjord-14795.herokuapp.com/api/regions"
   );
 
-  const { addMutation } = MutateData("managers");
+  const { addMutation } = MutateData("managers" , setIsOpen , isOpen);
   return (
     <Formik
       initialValues={{
@@ -28,6 +28,7 @@ const AddManagerForm = ({ setIsOpen, isOpen }) => {
       validationSchema={Manager}
       onSubmit={(values) => {
         addMutation.mutate(values);
+      
       }}
     >
       {({ errors, touched }) => (

@@ -1,10 +1,13 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const LinkStyle =
-  "pl-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline";
+  "pl-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg bg-red-700";
+const LinkStyleH =
+  "pl-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg bg-blue-700 ";
 const Navigation = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
+  const location = useLocation();
   return (
     <nav className=" bg-ehe-900 w-[15em] z-10  h-screen items-center fixed justify-between py-5 dark:bg-gray-800 mr-10">
       <div className="flex flex-col flex-wrap justify-between h-full px-4">
@@ -16,7 +19,9 @@ const Navigation = () => {
           </div>
           <div className="flex flex-col items-center bg-slate-700  mt-4 w-full py-6 rounded-lg  mb-4">
             <div className="h-20 w-20 rounded-full overflow-hidden">h</div>
-            <div className="text-sm font-semibold mt-3 text-white">{cookies?.user?.email}</div>
+            <div className="text-sm font-semibold mt-3 text-white">
+              {cookies?.user?.email}
+            </div>
             <div className="px-2 text-xs bg-blue-300 mt-3 rounded-md uppercase">
               {cookies?.user?.role}
             </div>
@@ -28,28 +33,52 @@ const Navigation = () => {
           <>
             {cookies?.user?.role == "admin" && (
               <>
-                <Link to="/nationalManager" className={`${LinkStyle}`}>
+                <NavLink
+                  to="/nationalManager"
+                  className={`pl-4 py-2 mt-2 text-sm font-semibold  rounded-lg text-white  ${
+                    "/nationalManager" == location.pathname
+                      ? "bg-gray-400"
+                      : "bg-gray-600"
+                  }  `}
+                >
                   national manager
-                </Link>
+                </NavLink>
 
-                <Link to="/AdminDash" className={`${LinkStyle}`}>
+                <NavLink
+                  to="/AdminDash"
+                  className={`pl-4 py-2 mt-2 text-sm font-semibold  rounded-lg text-white   ${
+                    "/AdminDash" == location.pathname
+                      ? "bg-gray-400"
+                      : "bg-gray-600"
+                  }  `}
+                >
                   AdminDash
-                </Link>
-
-                <Link to="/statistic" className={`${LinkStyle}`}>
-                  Manage Managers
-                </Link>
+                </NavLink>
               </>
             )}
 
             {cookies?.user?.role == "managers" && (
-              <Link to="/urbanCenter" className={`${LinkStyle}`}>
+              <Link
+                to="/urbanCenter"
+                className={`pl-4 py-2 mt-2 text-sm font-semibold  rounded-lg  text-white ${
+                  "/managers" == location.pathname
+                    ? "bg-gray-400"
+                    : "bg-gray-600"
+                }  `}
+              >
                 urbanCenter
               </Link>
             )}
 
             {cookies?.user?.role == "nationalManager" && (
-              <Link to="/patients" className={`${LinkStyle}`}>
+              <Link
+                to="/patients"
+                className={`pl-4 py-2 mt-2 text-sm font-semibold  rounded-lg text-white  ${
+                  "/patients" == location.pathname
+                    ? "bg-gray-400"
+                    : "bg-gray-600"
+                }  `}
+              >
                 patients
               </Link>
             )}

@@ -7,7 +7,6 @@ const {
     updateStatus,
     updateNotVaccinated
 } = require('../controllers/appointment.controller')
-const { NationalManager, AdminAuth } = require("../middleware/auth.middleware")
 
 router.get('/', show)
 router.post('/store', store)

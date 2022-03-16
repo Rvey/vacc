@@ -17,7 +17,6 @@ const Patients = Yup.object().shape({
   Cin: Yup.string().required("Required"),
   region: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
-  center: Yup.string().required("Required"),
 });
 
 const City = ({ data, region }) => {

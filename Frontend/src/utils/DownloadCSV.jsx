@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { usePapaParse, useCSVDownloader } from "react-papaparse";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { useFetch } from "../Hooks/useFetch";
 const DownloadCSV = () => {
   const { CSVDownloader, Type } = useCSVDownloader();
   const query = useQuery("patient", async () => {
@@ -10,8 +9,6 @@ const DownloadCSV = () => {
     return data;
   });
 
-  const { data } = useFetch("http://localhost:4000/api/appointments");
-  // console.log(query?.data?.filter((el) => el.patientStatus == "notVaccinated"));
   return (
     <div>
       <label className="flex bg-navy-400 hover:bg-ehe-600 p-3 text-white cursor-pointer justify-center items-center rounded-md  tracking-wide ease-linear transition-all duration-150">

@@ -25,7 +25,7 @@ const MyResponsivePie = () => {
         third++;
       } else if (element.VaccNumber == "Vaccinated") {
         vaccinated++;
-      } else if (element.VaccNumber == "NotVaccinated") {
+      } else if (element.VaccNumber == "notVaccinated") {
         notVaccinated++;
       }
     });
@@ -75,7 +75,7 @@ const MyResponsivePie = () => {
         modifiers: [["darker", 0.2]],
       }}
       arcLinkLabelsSkipAngle={10}
-      arcLinkLabelsTextColor="#ffff"
+      arcLinkLabelsTextColor="#00000"
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
@@ -154,7 +154,7 @@ const MyResponsivePie = () => {
             {
               on: "hover",
               style: {
-                itemTextColor: "#00000",
+                itemTextColor: "black",
               },
             },
           ],

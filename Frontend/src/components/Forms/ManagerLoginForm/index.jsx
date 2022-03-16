@@ -8,7 +8,7 @@ const ManagerSchema = Yup.object().shape({
 });
 
 const ManagerLoginForm = () => {
-  const { loginMutation, error } = LoginMutation("managers" , "urbanCenter");
+  const { loginMutation, error } = LoginMutation("managers" , "urbanCenter" );
 
   return (
     <Formik

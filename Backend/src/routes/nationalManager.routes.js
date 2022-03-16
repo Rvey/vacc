@@ -7,7 +7,6 @@ const {
     index,
     deleteNManager,
 } = require('../controllers/nationalManager.controller')
-const { AdminAuth } = require("../middleware/auth.middleware")
 router.get('/', index)
 router.post('/store',  store)
 router.delete('/:id', deleteNManager)

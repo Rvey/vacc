@@ -17,7 +17,7 @@ const ManagePatient = () => {
           </div>
           <PatientTable />
         </div>
-        <div className="w-[25%] h-[40em] py-14">
+        <div className="w-[20em] h-[40em] py-14">
           <MyResponsivePie />
         </div>
       </div>

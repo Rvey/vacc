@@ -7,7 +7,6 @@ const {
     index,
     deleteManager,
 } = require('../controllers/manager.contoller')
-const { AdminAuth } = require("../middleware/auth.middleware")
 
 router.get('/', index)
 router.post('/store', store)

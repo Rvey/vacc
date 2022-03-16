@@ -56,6 +56,8 @@ const store = async (req, res, next) => {
 
     const date = dayjs().add(1, "month");
 
+    const currentDay = dayjs(date).format('DD/MM/YYYY')
+
     const newAppointment = await appointment.create({
       email,
       firstName,
@@ -74,7 +76,7 @@ const store = async (req, res, next) => {
       center,
     });
 
-    sendMail(email, firstName, lastName, date);
+    sendMail(email, firstName, lastName, currentDay);
     res.status(200).json({
       newAppointment,
     });

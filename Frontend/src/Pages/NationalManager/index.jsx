@@ -24,7 +24,6 @@ const NationalManager = () => {
           </div>
           <NationalManagerTable />
         </div>
-        {/* <div className="w-[30] py-14">ehe</div> */}
       </div>
 
       <Modal
